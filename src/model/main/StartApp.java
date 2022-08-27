@@ -3,6 +3,8 @@ package model.main;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import model.rpg.LoadRPG;
+import model.rpg.RPGControler;
 import view.common.AppWindow;
 
 /*
@@ -20,8 +22,9 @@ public class StartApp {
 
     // Constructor
     public static void main(String[] args) {
-        AppWindow welcolmeFrame = new AppWindow();
+        RPGControler rpgControler = new RPGControler();
+        LoadRPG.loadRPGFromSave(rpgControler);
+        AppWindow welcolmeFrame = new AppWindow(rpgControler);
         welcolmeFrame.setVisible(true);
     }
-
 }

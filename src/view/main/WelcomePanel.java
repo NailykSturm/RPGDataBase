@@ -3,11 +3,10 @@ package view.main;
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
-import model.main.LoadRPG;
+import view.common.AppWindow;
+import view.common.MenuPanel;
 
 /*
  * Welcome panel of the application
@@ -15,33 +14,21 @@ import model.main.LoadRPG;
  */
 public class WelcomePanel extends JPanel {
 
+    private AppWindow appWindow;
+
     // Constructor
-    public WelcomePanel() {
+    public WelcomePanel(AppWindow mainWindow) {
+        this.appWindow = mainWindow;
         setLayout(new BorderLayout());
 
         // Menu bar
-        this.add(menu(), BorderLayout.NORTH);
+        this.add(new MenuPanel(appWindow), BorderLayout.NORTH);
 
         // Welcome message
         this.add(message(), BorderLayout.CENTER);
     }
 
     // ======= Elements =======
-    // Menu bar
-    private JPanel menu() {
-        JPanel menuPanel = new JPanel();
-        JMenu menu = new JMenu("Menu");
-        JMenu changeDBMenu = new LoadRPG().getMenu();
-        
-        menu.add(changeDBMenu);
-
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.add(menu);
-        menuPanel.setLayout(new BorderLayout());
-        menuPanel.add(menuBar, BorderLayout.WEST);
-
-        return menuPanel;
-    }
 
     // Welcome message
     private JPanel message() {
