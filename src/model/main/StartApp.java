@@ -12,10 +12,13 @@ import view.common.AppWindow;
  */
 public class StartApp {
 
+
     // Get screen size
     public final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // Name of the save file
+    public final static String FOLDER = "./saves/";
     public final static String RPG_FILE = "rpg.rpgdb";
+    public final static String RPG_INFO_FILE = "info.rpgdb";
     public final static String BESTIARY_FILE = "bestiary.rpgdb";
     public final static String SCRIPT_FILE = "script.rpgdb";
     public final static String NOTEBLOC_FILE = "notebloc.rpgdb";
@@ -23,7 +26,7 @@ public class StartApp {
     // Constructor
     public static void main(String[] args) {
         RPGControler rpgControler = new RPGControler();
-        LoadRPG.loadRPGFromSave(rpgControler);
+        rpgControler = LoadRPG.loadRPGFromSave(rpgControler);
         AppWindow welcolmeFrame = new AppWindow(rpgControler);
         welcolmeFrame.setVisible(true);
     }

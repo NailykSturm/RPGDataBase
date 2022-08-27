@@ -18,7 +18,7 @@ public class AppWindow extends JFrame {
         this.rpgControler = rpgControler;
         setTitle("RPG script planner tool");
         setSize(StartApp.screenSize);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         WelcomePanel welcomePanel = new WelcomePanel(this);
         this.setContentPane(welcomePanel);

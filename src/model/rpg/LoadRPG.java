@@ -12,13 +12,16 @@ import model.main.StartApp;
  */
 public class LoadRPG {
 
-    public static void loadRPGFromSave(RPGControler rpgControler) {
+    public static RPGControler loadRPGFromSave(RPGControler rpgControler) {
         ObjectInputStream ois_rpg;
 
         try {
-            ois_rpg = new ObjectInputStream(new FileInputStream(StartApp.RPG_FILE));
-            System.out.println(ois_rpg.readObject());
+            ois_rpg = new ObjectInputStream(new FileInputStream(StartApp.FOLDER + StartApp.RPG_FILE));
+            rpgControler = (RPGControler) ois_rpg.readObject();
 
+
+            ois_rpg.close();
+            System.out.println("Loading RPG done");
         } catch (FileNotFoundException eFNF) {
             System.out.println("Error append when loading => File not found");
         } catch (IOException eIO) {
@@ -28,5 +31,7 @@ public class LoadRPG {
             System.out.println("Error append when loading => Class not found");
             eCNFE.printStackTrace();
         }
+
+        return rpgControler;
     }
 }

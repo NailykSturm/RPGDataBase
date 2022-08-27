@@ -7,13 +7,13 @@ import java.util.ArrayList;
  * RPGControler class
  * Control of all the RPG in the RPGDataBase
  */
-public class RPGControler implements Serializable{
+public class RPGControler implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 10L;
     private ArrayList<RPGInfo> rpgList;
     private RPGInfo current;
 
-    public RPGControler () {
+    public RPGControler() {
         rpgList = new ArrayList<RPGInfo>();
     }
 
@@ -22,7 +22,7 @@ public class RPGControler implements Serializable{
         rpgList.add(newRPG);
         current = newRPG;
         saveRPG();
-        System.out.println("RPG " + rpgName + " added");
+        System.out.println(newRPG + " added");
     }
 
     public void saveRPG() {
@@ -32,7 +32,7 @@ public class RPGControler implements Serializable{
     public void removeRPG(RPGInfo rpg) {
         rpgList.remove(rpg);
         saveRPG();
-        System.out.println("RPG " + rpg.getName() + " removed");
+        System.out.println(rpg + " removed");
     }
 
     public ArrayList<RPGInfo> getRPGList() {
@@ -45,5 +45,15 @@ public class RPGControler implements Serializable{
 
     public void setCurrent(RPGInfo rpg) {
         current = rpg;
+    }
+
+    @Override
+    public String toString() {
+        String listRPG = "";
+        for (RPGInfo rpg : rpgList) {
+            listRPG += rpg + "\n";
+        }
+        return "========================\nRPGControler [ \n " + listRPG + "\n =========> current=" + current
+                + "\n========================\n]";
     }
 }

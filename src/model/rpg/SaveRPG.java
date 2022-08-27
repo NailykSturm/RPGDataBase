@@ -8,15 +8,14 @@ import model.main.StartApp;
 
 public class SaveRPG {
 
-
     public static void saveRPGToFile(RPGControler rpgControler) {
         try {
-            ObjectOutputStream oos_rpg = new ObjectOutputStream(new FileOutputStream(StartApp.RPG_FILE));
+            ObjectOutputStream oos_rpg = new ObjectOutputStream(new FileOutputStream(StartApp.FOLDER + StartApp.RPG_FILE));
             oos_rpg.writeObject(rpgControler);
             oos_rpg.close();
+            System.out.println("Saving RPG done");
         } catch (IOException eIO) {
             eIO.printStackTrace();
         }
     }
-
 }

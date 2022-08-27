@@ -9,18 +9,29 @@ import java.io.Serializable;
  */
 public class RPGInfo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 11L;
     private static int idRPG = 0;
 
     private String name;
+    private int id;
 
     public RPGInfo(String name) {
-        idRPG++;
         this.name = name;
-        System.out.println("RPG n°" + idRPG + " => " + name + " created");
+        this.id = idRPG;
+        idRPG++;
+        System.out.println("RPG n°" + id + " => " + name + " created");
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getStringForSave(){
+        return id + "_" + name + "_";
+    }
+
+    @Override
+    public String toString() {
+        return "RPG n°" + id + " => " + name;
     }
 }

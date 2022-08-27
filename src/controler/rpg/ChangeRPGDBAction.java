@@ -21,7 +21,6 @@ public class ChangeRPGDBAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         RPGControler rpgControler = appWindow.getRpg();
         rpgControler.setCurrent(rpg);
-        System.out.println(e);
 
         appWindow.getContentPane().removeAll();
         appWindow.getContentPane().add(new BestiaryMainPanel(appWindow));
