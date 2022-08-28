@@ -7,4 +7,7 @@ assignees: NailykSturm
 
 ---
 
-
+* Describe the problem
+* Describe the context around, especially what have you done just before
+* Anything else that can help me to reproduce it and then fix it
+* Give me your OS (Linux, Mac, Windows, Android, ...)
