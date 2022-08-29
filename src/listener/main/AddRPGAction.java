@@ -1,25 +1,24 @@
-package controler.rpg;
+package listener.main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import view.common.AppWindow;
-import view.main.WelcomePanel;
+import view.rpg.CreateRPGForm;
 
-public class CancelValidateRPGAction implements ActionListener {
+public class AddRPGAction implements ActionListener {
 
     private AppWindow appWindow;
 
-    public CancelValidateRPGAction(AppWindow appWindow) {
+    public AddRPGAction(AppWindow appWindow) {
         this.appWindow = appWindow;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         appWindow.getContentPane().removeAll();
-        appWindow.getContentPane().add(new WelcomePanel(appWindow));
+        appWindow.getContentPane().add(new CreateRPGForm(appWindow));
         appWindow.getContentPane().revalidate();
         appWindow.getContentPane().repaint();
     }
-    
 }

@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controler.rpg.CancelValidateRPGAction;
-import controler.rpg.ValidateRPGAction;
+import listener.rpg.CancelValidateRPGAction;
+import listener.rpg.ValidateRPGAction;
 import view.common.AppWindow;
 import view.common.MenuPanel;
 
@@ -35,7 +35,7 @@ public class CreateRPGForm extends JPanel {
     }
 
     // Center form panel
-    private JPanel formPanel(){
+    private JPanel formPanel() {
         JTextField rpgName = new JTextField("Write your RPG name here");
         JButton validate = new JButton("Validate");
         validate.addActionListener(new ValidateRPGAction(appWindow, rpgName));

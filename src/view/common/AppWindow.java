@@ -1,6 +1,7 @@
 package view.common;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import model.main.StartApp;
 import model.rpg.RPGControler;
@@ -26,5 +27,12 @@ public class AppWindow extends JFrame {
 
     public RPGControler getRpg() {
         return rpgControler;
+    }
+
+    public void changeView(JPanel newPanel) {
+        this.getContentPane().removeAll();
+        this.getContentPane().add(newPanel);
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
     }
 }

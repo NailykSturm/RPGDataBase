@@ -1,4 +1,4 @@
-package controler.rpg;
+package listener.rpg;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,9 +25,6 @@ public class ValidateRPGAction implements ActionListener {
         RPGControler rpgControler = appWindow.getRpg();
         rpgControler.addRPG(rpgNameField.getText());
 
-        appWindow.getContentPane().removeAll();
-        appWindow.getContentPane().add(new BestiaryMainPanel(appWindow));
-        appWindow.getContentPane().revalidate();
-        appWindow.getContentPane().repaint();
+        appWindow.changeView(new BestiaryMainPanel(appWindow, rpgControler.getCurrent().getBestiary()));
     }
 }

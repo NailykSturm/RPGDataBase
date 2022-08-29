@@ -34,7 +34,7 @@ public class WelcomePanel extends JPanel {
     private JPanel message() {
         JPanel messagePanel = new JPanel();
         messagePanel.setLayout(new BorderLayout());
-        
+
         messagePanel.add(new JLabel("Welcome to the script planning tool for RPG's game"), BorderLayout.CENTER);
         messagePanel.add(new JLabel("Created by Nailyk Sturm"), BorderLayout.SOUTH);
 

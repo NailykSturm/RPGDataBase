@@ -16,12 +16,10 @@ public class LoadRPG {
         ObjectInputStream ois_rpg;
 
         try {
-            ois_rpg = new ObjectInputStream(new FileInputStream(StartApp.FOLDER + StartApp.RPG_FILE));
+            ois_rpg = new ObjectInputStream(new FileInputStream(StartApp.FOLDER + StartApp.RPG_FILE + StartApp.EXTENSION));
             rpgControler = (RPGControler) ois_rpg.readObject();
-
-
+            rpgControler.checkIfEverythingIsLoaded();
             ois_rpg.close();
-            System.out.println("Loading RPG done");
         } catch (FileNotFoundException eFNF) {
             System.out.println("Error append when loading => File not found");
         } catch (IOException eIO) {

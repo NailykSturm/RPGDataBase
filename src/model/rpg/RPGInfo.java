@@ -2,6 +2,8 @@ package model.rpg;
 
 import java.io.Serializable;
 
+import model.bestiary.BestiaryInfo;
+
 /**
  * RPGInfo class
  * contains all the information about the RPG
@@ -14,10 +16,12 @@ public class RPGInfo implements Serializable {
 
     private String name;
     private int id;
+    private BestiaryInfo bestiary;
 
     public RPGInfo(String name) {
         this.name = name;
         this.id = idRPG;
+        this.bestiary = new BestiaryInfo();
         idRPG++;
         System.out.println("RPG n°" + id + " => " + name + " created");
     }
@@ -30,8 +34,20 @@ public class RPGInfo implements Serializable {
         return id + "_" + name + "_";
     }
 
+    public BestiaryInfo getBestiary() {
+        return bestiary;
+    }
+
     @Override
     public String toString() {
         return "RPG n°" + id + " => " + name;
+    }
+
+    public void checkIfEverythingIsLoaded() {
+        if (bestiary != null) {
+            bestiary.checkIfEverythingIsLoaded();
+        }else {
+            bestiary = new BestiaryInfo();
+        }
     }
 }

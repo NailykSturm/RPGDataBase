@@ -39,8 +39,8 @@ public class RPGControler implements Serializable {
         return rpgList;
     }
 
-    public String getCurrent() {
-        return current.getName();
+    public RPGInfo getCurrent() {
+        return current;
     }
 
     public void setCurrent(RPGInfo rpg) {
@@ -55,5 +55,12 @@ public class RPGControler implements Serializable {
         }
         return "========================\nRPGControler [ \n " + listRPG + "\n =========> current=" + current
                 + "\n========================\n]";
+    }
+
+    public void checkIfEverythingIsLoaded() {
+        for (RPGInfo rpg : rpgList) {
+            rpg.checkIfEverythingIsLoaded();
+        }
+        if (current == null) current = rpgList.get(0);
     }
 }
