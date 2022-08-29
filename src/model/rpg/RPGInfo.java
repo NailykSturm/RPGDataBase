@@ -1,8 +1,11 @@
 package model.rpg;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import model.bestiary.BestiaryForm;
 import model.bestiary.BestiaryInfo;
+import model.bestiary.LoadBestiary;
 
 /**
  * RPGInfo class
@@ -16,22 +19,23 @@ public class RPGInfo implements Serializable {
 
     private String name;
     private int id;
+    private RPGControler rpgControler;
     private BestiaryInfo bestiary;
+    private ArrayList<BestiaryForm> bestiaryFormTemplates;
 
-    public RPGInfo(String name) {
+    public RPGInfo(RPGControler rpgControler, String name) {
         this.name = name;
         this.id = idRPG;
-        this.bestiary = new BestiaryInfo();
+        this.rpgControler = rpgControler;
+        this.bestiary = new BestiaryInfo(this);
+        this.bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(new ArrayList<BestiaryForm>(),
+                this.rpgControler);
         idRPG++;
         System.out.println("RPG n°" + id + " => " + name + " created");
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getStringForSave(){
-        return id + "_" + name + "_";
     }
 
     public BestiaryInfo getBestiary() {
@@ -43,11 +47,19 @@ public class RPGInfo implements Serializable {
         return "RPG n°" + id + " => " + name;
     }
 
-    public void checkIfEverythingIsLoaded() {
-        if (bestiary != null) {
-            bestiary.checkIfEverythingIsLoaded();
-        }else {
-            bestiary = new BestiaryInfo();
-        }
+    public void checkIfEverythingIsLoaded(RPGControler rpgControler) {
+        if (bestiary == null)
+            bestiary = new BestiaryInfo(this);
+        if (rpgControler != null)
+            this.rpgControler = rpgControler;
+        if (bestiaryFormTemplates == null)
+            bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(new ArrayList<BestiaryForm>(), rpgControler);
+    }
+
+    /**
+     * Getter of all the saved templates
+     */
+    public ArrayList<BestiaryForm> getTemplates() {
+        return bestiaryFormTemplates;
     }
 }

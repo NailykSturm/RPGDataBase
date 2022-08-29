@@ -13,10 +13,12 @@ public class BestiaryMainPanel extends JPanel {
 
     private AppWindow appWindow;
     private BestiaryFormPanel bestiaryFormPanel;
+    private BestiaryInfo bestiary;
 
     public BestiaryMainPanel(AppWindow appWindow, BestiaryInfo bestiaryInfo) {
         this.appWindow = appWindow;
-        this.bestiaryFormPanel = new BestiaryFormPanel(bestiaryInfo.getCurrentForm());
+        this.bestiary = bestiaryInfo;
+        this.bestiaryFormPanel = new BestiaryFormPanel(this, bestiaryInfo);
 
         this.setLayout(new BorderLayout());
 
@@ -36,7 +38,7 @@ public class BestiaryMainPanel extends JPanel {
     private JPanel bestiaryPanel() {
         JPanel bestiaryPanel = new JPanel();
         bestiaryPanel.setLayout(new BorderLayout());
-        bestiaryPanel.add(new BestiaryListPanel().getPanel(), BorderLayout.CENTER);
+        bestiaryPanel.add(new BestiaryListPanel(bestiary).getPanel(), BorderLayout.CENTER);
         bestiaryPanel.add(bestiaryFormPanel.getPanel(), BorderLayout.EAST);
         return bestiaryPanel;
     }
@@ -47,5 +49,9 @@ public class BestiaryMainPanel extends JPanel {
         this.add(bestiaryPanel(), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
+    }
+
+    public BestiaryFormPanel getFormPanel() {
+        return this.bestiaryFormPanel;
     }
 }

@@ -18,7 +18,7 @@ public class RPGControler implements Serializable {
     }
 
     public void addRPG(String rpgName) {
-        RPGInfo newRPG = new RPGInfo(rpgName);
+        RPGInfo newRPG = new RPGInfo(this, rpgName);
         rpgList.add(newRPG);
         current = newRPG;
         saveRPG();
@@ -59,7 +59,7 @@ public class RPGControler implements Serializable {
 
     public void checkIfEverythingIsLoaded() {
         for (RPGInfo rpg : rpgList) {
-            rpg.checkIfEverythingIsLoaded();
+            rpg.checkIfEverythingIsLoaded(this);
         }
         if (current == null) current = rpgList.get(0);
     }

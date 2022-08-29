@@ -3,6 +3,8 @@ package model.bestiary;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import model.rpg.RPGInfo;
+
 /**
  * Class that control all the bestiary for a given RPG
  * @author NailykSturm
@@ -13,17 +15,18 @@ public class BestiaryInfo implements Serializable {
     private static int idBestiary = 0;
 
     private int id;
-    private ArrayList<BestiaryForm> templates;
     private ArrayList<BestiaryEntity> entities;
     private BestiaryForm form;
+    private RPGInfo rpg;
 
     /**
      * Constructor for the bestiary info
      */
-    public BestiaryInfo() {
+    public BestiaryInfo(RPGInfo rpg) {
         this.id = idBestiary;
-        this.entities = new ArrayList<BestiaryEntity>();
-        this.form = new BestiaryForm();
+        this.rpg = rpg;
+        this.entities = LoadBestiary.loadBestiary(rpg);
+        this.form = LoadBestiary.loadBestiaryFormFromFile(rpg);
         idBestiary++;
         System.out.println("New bestiary created with id " + id);
     }
@@ -33,6 +36,7 @@ public class BestiaryInfo implements Serializable {
      */
     public void addEntity(BestiaryEntity entity) {
         this.entities.add(entity);
+        SaveBestiary.saveBestiaryTofile(entities, rpg);
     }
 
     /**
@@ -40,39 +44,30 @@ public class BestiaryInfo implements Serializable {
      */
     public void removeEntity(BestiaryEntity entity) {
         this.entities.remove(entity);
+        SaveBestiary.saveBestiaryTofile(entities, rpg);
     }
 
     /**
      * Edit an entity from the bestiary
      */
-    public void editEntity(BestiaryEntity entity, String fieldToChange, String newValue) {
-        entity.editCaracteristic(fieldToChange, newValue);
+    public void editEntity(BestiaryEntity entity, String fieldToChange, String oldValue, String newValue) {
+        entity.editCaracteristic(fieldToChange, oldValue, newValue);
+        SaveBestiary.saveBestiaryTofile(entities, rpg);
     }
 
     /**
-     * Method to check if any information isn't null
-     * after retrieve the informations from the saved file
+     * Function that return the bestiary
+     * @return the list of entities in the bestiary
      */
-    public void checkIfEverythingIsLoaded() {
-        if (form == null)
-            form = new BestiaryForm();
-        if (entities == null)
-            entities = new ArrayList<BestiaryEntity>();
-        if (templates == null)
-            templates = new ArrayList<BestiaryForm>();
+    public ArrayList<BestiaryEntity> getEntities() {
+        return entities;
     }
 
     /**
-     * Getter of the current form for entities
+     * Function that return the form of the bestiary
+     * @return the form of the bestiary
      */
     public BestiaryForm getCurrentForm() {
         return form;
-    }
-
-    /**
-     * Getter of all the saved templates
-     */
-    public ArrayList<BestiaryForm> getTemplates() {
-        return templates;
     }
 }

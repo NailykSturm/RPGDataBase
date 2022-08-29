@@ -5,13 +5,18 @@ import java.util.HashMap;
 
 import javax.swing.JTextField;
 
+import model.rpg.RPGInfo;
+
 public class BestiaryForm implements Serializable{
 
     private static final long serialVersionUID = 21L;
     public static int SIZE_JTEXTFIELD = 15;
+
+    private RPGInfo rpg;
     private HashMap<String, JTextField> fieldsMap;
     
-    public BestiaryForm() {
+    public BestiaryForm(RPGInfo rpg) {
+        this.rpg = rpg;
         fieldsMap = new HashMap<String, JTextField>();
     }
 
@@ -22,6 +27,7 @@ public class BestiaryForm implements Serializable{
     public void addField(String fieldName) {
         JTextField field = new JTextField(SIZE_JTEXTFIELD);
         fieldsMap.putIfAbsent(fieldName, field);
+        SaveBestiary.saveBestiaryFormToFile(this, rpg);
     }
 
     /**
@@ -30,6 +36,7 @@ public class BestiaryForm implements Serializable{
      */
     public void removeField(String fieldName) {
         fieldsMap.remove(fieldName);
+        SaveBestiary.saveBestiaryFormToFile(this, rpg);
     }
 
     /**
@@ -42,6 +49,13 @@ public class BestiaryForm implements Serializable{
         fieldsMap.remove(oldFieldName);
         fieldsMap.putIfAbsent(newFieldName, new JTextField(SIZE_JTEXTFIELD));
         fieldsMap.get(newFieldName).setText(value);
+        SaveBestiary.saveBestiaryFormToFile(this, rpg);
+    }
+
+    public void resetAllFields() {
+        for (String key : fieldsMap.keySet()) {
+            fieldsMap.get(key).setText("");
+        }
     }
 
     public HashMap<String, JTextField> getFields() {

@@ -13,7 +13,7 @@ public class SaveRPG {
             ObjectOutputStream oos_rpg = new ObjectOutputStream(new FileOutputStream(StartApp.FOLDER + StartApp.RPG_FILE + StartApp.EXTENSION));
             oos_rpg.writeObject(rpgControler);
             oos_rpg.close();
-            System.out.println("Saving RPG done");
+            System.out.println("Saving RPGControler done");
         } catch (IOException eIO) {
             eIO.printStackTrace();
         }

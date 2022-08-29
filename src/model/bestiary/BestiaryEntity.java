@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class BestiaryEntity implements Serializable {
-    
+
     private static final long serialVersionUID = 22L;
     private static int cptEntity = 0;
 
@@ -17,12 +17,13 @@ public class BestiaryEntity implements Serializable {
         System.out.println("New entity created with id " + id);
         cptEntity++;
     }
-    
+
     public HashMap<String, String> getCaracteristics() {
         return characteristics;
     }
 
-    public void editCaracteristic(String fieldToChange, String newValue) {
-        characteristics.replace(fieldToChange, newValue);
+    public void editCaracteristic(String fieldToChange, String oldValue, String newValue) {
+        if (!characteristics.replace(fieldToChange, oldValue, newValue))
+            characteristics.put(fieldToChange, newValue);
     }
 }
