@@ -47,7 +47,6 @@ public class BestiaryListPanel extends JPanel {
         gbc.insets = new Insets(5, 0, 5, 0);
         gbc.gridx = 0;
             gbc.gridy = -1;
-        System.out.println("DEBUG => BestiaryListPanel => number of entities : " + bestiary.getEntities().size());
         for (BestiaryEntity entity : bestiary.getEntities()) {
             mainPanel.add(new BestiaryEntityPanel(entity).getPanel(), gbc);
         }

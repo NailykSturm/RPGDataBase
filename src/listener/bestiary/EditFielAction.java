@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JCheckBox;
-import javax.swing.JTextField;
 
 import model.bestiary.BestiaryForm;
 import view.bestiary.BestiaryFormPanel;
 
-public class AddField implements ActionListener {
+public class EditFielAction implements ActionListener {
 
-    private JTextField fieldToAdd;
-    private BestiaryForm bestiaryForm;
     private BestiaryFormPanel bestiaryFormPanel;
+    private String fieldName;
+    private BestiaryForm bestiary;
 
-    public AddField(BestiaryFormPanel bestiaryFormPanel, JTextField fieldToAdd, BestiaryForm bestiaryForm) {
+    public EditFielAction(String editField, BestiaryForm bestiaryForm,
+            BestiaryFormPanel bestiaryFormPanel) {
+        this.fieldName = editField;
         this.bestiaryFormPanel = bestiaryFormPanel;
-        this.fieldToAdd = fieldToAdd;
-        this.bestiaryForm = bestiaryForm;
+        this.bestiary = bestiaryForm;
     }
 
     @Override
@@ -34,8 +34,9 @@ public class AddField implements ActionListener {
                 System.out.println("The option " + key + " is selected");
             }
         }
-        bestiaryForm.addField(fieldToAdd.getText(), options);
-        fieldToAdd.setText("");
+
+        bestiary.editField(fieldName, options);
+        bestiaryFormPanel.changeFormToAdd();
         bestiaryFormPanel.refresh();
     }
 }

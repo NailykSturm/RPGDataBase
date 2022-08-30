@@ -15,7 +15,7 @@ public class LoadBestiary {
     /**
      * Load the bestiary
      */
-    @SuppressWarnings("unchecked") 
+    @SuppressWarnings("unchecked")
     public static ArrayList<BestiaryEntity> loadBestiary(RPGInfo rpg) {
         ObjectInputStream ois_entity;
         ArrayList<BestiaryEntity> entities;
@@ -60,6 +60,7 @@ public class LoadBestiary {
                     StartApp.FOLDER + StartApp.BESTIARY_FILE + "_" + StartApp.BESTIARY_FORM_FILE + "_" + rpg.getName()
                             + StartApp.EXTENSION));
             form = (BestiaryForm) ois_rpg.readObject();
+            form.checkIfEverythingIsLoaded(rpg);
             ois_rpg.close();
         } catch (FileNotFoundException eFNF) {
             System.out.println("Error append when loading form of " + rpg.getName() + " => File not found");
@@ -86,7 +87,9 @@ public class LoadBestiary {
                 ois_rpg = new ObjectInputStream(new FileInputStream(
                         StartApp.FOLDER + StartApp.FOLDER_TEMPLATE + StartApp.BESTIARY_FILE + "_"
                                 + StartApp.BESTIARY_TEMPLATE_FILE + "_" + rpg.getName() + StartApp.EXTENSION));
-                form.add((BestiaryForm) ois_rpg.readObject());
+                BestiaryForm template = (BestiaryForm) ois_rpg.readObject();
+                template.checkIfEverythingIsLoaded(rpg);
+                form.add(template);
                 ois_rpg.close();
             } catch (FileNotFoundException eFNF) {
                 System.out.println("Error append when loading template of " + rpg.getName() + " => File not found");
