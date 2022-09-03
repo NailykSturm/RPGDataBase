@@ -11,6 +11,11 @@ import javax.swing.JTextField;
 import model.bestiary.BestiaryForm;
 import view.bestiary.BestiaryFormPanel;
 
+/**
+ * Listener used to add a field to the list of field of the bestiary form
+ * 
+ * @author NailykSturm
+ */
 public class AddField implements ActionListener {
 
     private JTextField fieldToAdd;

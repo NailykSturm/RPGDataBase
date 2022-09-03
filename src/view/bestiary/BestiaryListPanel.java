@@ -15,11 +15,23 @@ import listener.bestiary.DeleteEntityAction;
 import model.bestiary.BestiaryEntity;
 import model.bestiary.BestiaryInfo;
 
+/**
+ * View of all the entities in the bestiary
+ * 
+ * @author NailykSturm
+ */
 public class BestiaryListPanel extends JPanel {
 
+    /** Bestiary used */
     private BestiaryInfo bestiary;
+    /** Parent bestiary main panel */
     private BestiaryMainPanel bestiaryMainPanel;
 
+    /**
+     * Constructor
+     * @param bestiary bestiary used
+     * @param bestiaryMainPanel bestiary main panel
+     */
     public BestiaryListPanel(BestiaryInfo bestiary, BestiaryMainPanel bestiaryMainPanel) {
         this.bestiary = bestiary;
         this.bestiaryMainPanel = bestiaryMainPanel;
@@ -28,10 +40,18 @@ public class BestiaryListPanel extends JPanel {
         this.add(mainPanel(), BorderLayout.CENTER);
     }
 
+    /**
+     * Getter of the List panel
+     * @return the panel with the list of the entities
+     */
     public JPanel getPanel() {
         return this;
     }
 
+    /**
+     * Create an information panel
+     * @return the information panel created
+     */
     private JPanel infoPanel() {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
@@ -39,6 +59,10 @@ public class BestiaryListPanel extends JPanel {
         return infoPanel;
     }
 
+    /**
+     * Create a JScrollPane that show all the entities
+     * @return the JScrollPane
+     */
     private JScrollPane mainPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.CYAN);

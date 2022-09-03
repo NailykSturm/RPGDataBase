@@ -13,11 +13,23 @@ import javax.swing.JPanel;
 import listener.bestiary.EditEntityRequest;
 import model.bestiary.BestiaryEntity;
 
+/**
+ * Panel of one entity
+ * 
+ * @author NailykSturm
+ */
 public class BestiaryEntityPanel extends JPanel {
 
+    /** The entity to display */
     private BestiaryEntity entity;
+    /** The bestiary's main panel */
     private BestiaryMainPanel bestiaryMainPanel;
 
+    /**
+     * Constructor
+     * @param entity the entity to display
+     * @param bestiaryMainPanel the bestiary's main panel
+     */
     public BestiaryEntityPanel(BestiaryEntity entity, BestiaryMainPanel bestiaryMainPanel) {
         this.entity = entity;
         this.bestiaryMainPanel = bestiaryMainPanel;
@@ -27,10 +39,18 @@ public class BestiaryEntityPanel extends JPanel {
         this.add(entityPanel(), BorderLayout.CENTER);
     }
 
+    /**
+     * 
+     * @return the entity's panel
+     */
     public JPanel getPanel() {
         return this;
     }
 
+    /**
+     * 
+     * @return a JPanel with all the entity's data
+     */
     private JPanel entityPanel() {
         JPanel entityPanel = new JPanel();
         entityPanel.addMouseListener(new EditEntityRequest(entity, bestiaryMainPanel));
@@ -47,6 +67,9 @@ public class BestiaryEntityPanel extends JPanel {
         return entityPanel;
     }
 
+    /**
+     * Refresh displayed data
+     */
     public void refresh() {
         this.removeAll();
         this.add(entityPanel(), BorderLayout.CENTER);

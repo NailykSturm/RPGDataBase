@@ -8,10 +8,17 @@ import java.util.ArrayList;
 import model.main.StartApp;
 import model.rpg.RPGInfo;
 
+/**
+ * Class that save the bestiary in a file
+ * 
+ * @author NailykSturm
+ */
 public class SaveBestiary {
 
     /**
      * Save the bestiary into a file
+     * @param entities the entities to save
+     * @param rpg the rpg of the bestiary
      */
     public static void saveBestiaryTofile(ArrayList<BestiaryEntity> bestiary, RPGInfo rpg) {
         try {
@@ -28,6 +35,8 @@ public class SaveBestiary {
 
     /**
      * Save the actual Form into a file
+     * @param bestiaryForm the form to save
+     * @param rpg the rpg used by the bestiary
      */
     public static void saveBestiaryFormToFile(BestiaryForm bestiaryForm, RPGInfo rpg) {
         try {
@@ -44,6 +53,8 @@ public class SaveBestiary {
 
     /**
      * Save the form as a Template who can be used to create a new form
+     * @param bestiaryForm the form to save
+     * @param rpg the rpg used by the bestiary
      */
     public static void saveBestiaryFormAsTemplate(BestiaryForm bestiaryForm, RPGInfo rpg) {
         try {

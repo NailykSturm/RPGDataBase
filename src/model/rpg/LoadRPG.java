@@ -9,9 +9,14 @@ import model.main.StartApp;
 
 /**
  * Class who load the RPGs from the save file
+ * 
+ * @author NailykSturm
  */
 public class LoadRPG {
 
+    /**
+     * Load the RPGs
+     */
     public static RPGControler loadRPGFromSave() {
         ObjectInputStream ois_rpg;
         RPGControler rpgControler;

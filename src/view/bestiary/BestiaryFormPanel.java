@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 import listener.bestiary.AddBestiaryAction;
 import listener.bestiary.AddField;
-import listener.bestiary.DeleteFieldRequest;
+import listener.bestiary.DeleteFieldAction;
 import listener.bestiary.EditBestiaryAction;
 import listener.bestiary.EditFieldAction;
 import listener.bestiary.EditFieldRequest;
@@ -27,24 +27,49 @@ import model.bestiary.BestiaryEntity;
 import model.bestiary.BestiaryForm;
 import model.bestiary.BestiaryInfo;
 
+/** 
+ * Class that used to show the form for adding or editing an entity
+ * 
+ * @author NailykSturm
+ */
 public class BestiaryFormPanel extends JPanel {
 
+    /** Mode for adding a field */
     private static final String ADD_FIELD_MODE = "Add Field";
+    /** Mode for editing a field */
     private static final String EDIT_FIELD_MODE = "Edit Field";
+    /** Mode of adding an entity */
     private static final String ADD_ENTITY_MODE = "Add Entity";
+    /** Mode of editing an entity */
     private static final String EDIT_ENTITY_MODE = "Edit Entity";
+    /** The entity's adding button */
     private JButton addButton;
+    /** The entity's editing button */
     private JButton editButton;
+    /** The HashMap of JTextField of the form */
     private HashMap<String, JTextField> bestiaryFormHashMap;
+    /** The HashMap of JCheckBox for field options */
     private HashMap<String, JCheckBox> checkBoxes;
+    /** The bestiary's main panel */
     private BestiaryMainPanel mainPanel;
+    /** The form for this bestiary */
     private BestiaryForm bestiaryForm;
+    /** The bestiary used */
     private BestiaryInfo bestiary;
+    /** Mode for a fiel (add/edit) */
     private String field_mode;
+    /** Mode for the entity (add/edit) */
     private String entity_mode;
+    /** The field to edit (null if the field_mode is adding) */
     private String editField = null;
+    /** The editing entity (null if the entity_mode is adding) */
     private BestiaryEntity editEntity = null;
 
+    /**
+     * Constructor
+     * @param mainPanel bestiary's main panel
+     * @param bestiary the bestiary used 
+     */
     public BestiaryFormPanel(BestiaryMainPanel mainPanel, BestiaryInfo bestiary) {
         this.bestiary = bestiary;
         this.mainPanel = mainPanel;
@@ -67,20 +92,33 @@ public class BestiaryFormPanel extends JPanel {
         this.add(addFieldPanel(), BorderLayout.SOUTH);
     }
 
+    /**
+     * refresh the data used by the adding button
+     */
     private void setAddButton(){
         addButton = new JButton("Add your entity to the bestiary");
         addButton.addActionListener(new AddBestiaryAction(mainPanel, bestiary));
     }
 
+    /**
+     * refresh data used for the edit button
+     */
     private void setEditButton() {
         editButton = new JButton("Edit your entity in the bestiary");
         editButton.addActionListener(new EditBestiaryAction(this, mainPanel, bestiary, bestiaryForm, editEntity));
     }
 
+    /**
+     * Getter of the JPanel of the form
+     * @return the form's JPanel
+     */
     public JPanel getPanel() {
         return this;
     }
 
+    /**
+     * Refresh the display
+     */
     public void refresh() {
         this.removeAll();
         if (this.entity_mode == ADD_ENTITY_MODE)
@@ -93,37 +131,61 @@ public class BestiaryFormPanel extends JPanel {
         this.repaint();
     }
 
+    /**
+     * Change the form's action mode to editing
+     */
     public void changeFormToEdit(String fieldName) {
         this.field_mode = EDIT_FIELD_MODE;
         this.editField = fieldName;
     }
 
+    /**
+     * Change the form's action mode to adding
+     */
     public void changeFormToAdd() {
         this.field_mode = ADD_FIELD_MODE;
         this.editField = null;
     }
 
+    /**
+     * Change the entity's action mode to editing
+     * @param entity entity to edit
+     */
     public void changeEntityToEdit(BestiaryEntity entity) {
         this.entity_mode = EDIT_ENTITY_MODE;
         this.editEntity = entity;
         this.setEditButton();
     }
 
+    /**
+     * Change the entity's action mode to adding
+     */
     public void changeEntityToAdd() {
         this.entity_mode = ADD_ENTITY_MODE;
         this.editEntity = null;
         this.setAddButton();
     }
 
+    /**
+     * Getter of all the fields 
+     * @return the HashMap of the fields
+     */
     public HashMap<String, JTextField> getBestiaryFormHashMap() {
         return bestiaryFormHashMap;
     }
 
+    /**
+     * Getter of the checkbox used for options
+     * @return a HashMap with the options
+     */
     public HashMap<String, JCheckBox> getOptionsFiels() {
         return checkBoxes;
     }
 
-    // Center panel for adding or editing fields in the bestiary
+    /**
+     * Create a JScrollPanel with the form inside for creating or editing an entity
+     * @return the JScrollPane of the form
+     */
     private JScrollPane scrollPanel() {
         JPanel scrollPanel = new JPanel();
         JScrollPane scrollForm = new JScrollPane(scrollPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -165,7 +227,7 @@ public class BestiaryFormPanel extends JPanel {
 
             gbcField.gridx = GridBagConstraints.RELATIVE;
             JButton deleteButton = new JButton("Delete field");
-            deleteButton.addActionListener(new DeleteFieldRequest(key, bestiary, this));
+            deleteButton.addActionListener(new DeleteFieldAction(key, bestiary, this));
 
             field.add(deleteButton, gbcField);
             gbcField.gridx = GridBagConstraints.RELATIVE;

@@ -8,9 +8,17 @@ import javax.swing.JPanel;
 
 import view.rpg.ListRPGMenu;
 
+/**
+ * Class of the menu of the application
+ * 
+ * @author NailykSturm
+ */
 public class MenuPanel extends JPanel {
 
-    // Menu bar
+    /**
+     * Constructor
+     * @param appWindow the main app's window
+     */
     public MenuPanel(AppWindow appWindow) {
         JMenu menu = new JMenu("Menu");
         JMenu changeDBMenu = new ListRPGMenu(appWindow, appWindow.getRpg());

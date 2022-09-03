@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import model.bestiary.BestiaryForm;
 import view.bestiary.BestiaryFormPanel;
 
+/**
+ * Listener used to reset the bestiary's form
+ * 
+ * @author NailykSturm
+ */
 public class ResetBestiaryForm implements ActionListener {
 
     private BestiaryForm bestiaryForm;

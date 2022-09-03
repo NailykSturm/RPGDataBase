@@ -7,6 +7,11 @@ import model.bestiary.BestiaryEntity;
 import view.bestiary.BestiaryFormPanel;
 import view.bestiary.BestiaryMainPanel;
 
+/**
+ * Listener used to ask an edit for an entity
+ * 
+ * @author NailykSturm
+ */
 public class EditEntityRequest implements MouseListener {
 
     private BestiaryEntity entity;

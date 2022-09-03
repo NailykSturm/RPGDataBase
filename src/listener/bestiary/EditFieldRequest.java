@@ -5,6 +5,11 @@ import java.awt.event.ActionListener;
 
 import view.bestiary.BestiaryFormPanel;
 
+/**
+ * Listener used to ask an edit for a field
+ * 
+ * @author NailykSturm
+ */
 public class EditFieldRequest implements ActionListener {
 
     private BestiaryFormPanel bestiaryFormPanel;

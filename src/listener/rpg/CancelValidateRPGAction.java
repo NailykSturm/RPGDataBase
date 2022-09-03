@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import view.common.AppWindow;
 import view.main.WelcomePanel;
 
+/**
+ * Listener used to cancel the validation of a RPG
+ * 
+ * @author NailykSturm
+ */
 public class CancelValidateRPGAction implements ActionListener {
 
     private AppWindow appWindow;

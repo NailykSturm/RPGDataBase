@@ -8,6 +8,11 @@ import model.rpg.RPGInfo;
 import view.bestiary.BestiaryMainPanel;
 import view.common.AppWindow;
 
+/**
+ * Listener used to change the RPG database
+ * 
+ * @author NailykSturm
+ */
 public class ChangeRPGDBAction implements ActionListener {
 
     private AppWindow appWindow;

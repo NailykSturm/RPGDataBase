@@ -10,10 +10,16 @@ import model.main.StartApp;
 import model.rpg.RPGControler;
 import model.rpg.RPGInfo;
 
+/**
+ * Class that load the bestiary from a file
+ * 
+ * @author NailykSturm
+ */
 public class LoadBestiary {
 
     /**
      * Load the bestiary
+     * @param rpg the rpg used by the bestiary
      */
     @SuppressWarnings("unchecked")
     public static ArrayList<BestiaryEntity> loadBestiary(RPGInfo rpg) {
@@ -50,6 +56,7 @@ public class LoadBestiary {
 
     /**
      * Load the last form used
+     * @param rpg the rpg used by the bestiary
      */
     public static BestiaryForm loadBestiaryFormFromFile(RPGInfo rpg) {
         ObjectInputStream ois_rpg;
@@ -79,6 +86,8 @@ public class LoadBestiary {
 
     /**
      * Load all templates used to create a new form
+     * @param form the form to load
+     * @param rpgs the rpg used by the bestiary
      */
     public static ArrayList<BestiaryForm> loadBestiaryTemplate(ArrayList<BestiaryForm> form, RPGControler rpgs) {
         for (RPGInfo rpg : rpgs.getRPGList()) {

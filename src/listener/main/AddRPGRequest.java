@@ -6,11 +6,16 @@ import java.awt.event.ActionListener;
 import view.common.AppWindow;
 import view.rpg.CreateRPGForm;
 
-public class AddRPGAction implements ActionListener {
+/**
+ * Listener used to request the creation of a new RPG database
+ * 
+ * @author NailykSturm
+ */
+public class AddRPGRequest implements ActionListener {
 
     private AppWindow appWindow;
 
-    public AddRPGAction(AppWindow appWindow) {
+    public AddRPGRequest(AppWindow appWindow) {
         this.appWindow = appWindow;
     }
 

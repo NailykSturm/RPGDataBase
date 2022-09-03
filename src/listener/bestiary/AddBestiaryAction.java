@@ -10,6 +10,11 @@ import model.bestiary.BestiaryEntity;
 import model.bestiary.BestiaryInfo;
 import view.bestiary.BestiaryMainPanel;
 
+/**
+ * Listener used to add an entity to the bestiary
+ * 
+ * @author NailykSturm
+ */
 public class AddBestiaryAction implements ActionListener {
 
     private BestiaryMainPanel bestiaryPanel;

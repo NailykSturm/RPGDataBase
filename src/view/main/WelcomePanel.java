@@ -8,15 +8,20 @@ import javax.swing.JPanel;
 import view.common.AppWindow;
 import view.common.MenuPanel;
 
-/*
+/**
  * Welcome panel of the application
  * Contains a welcome message and a button to choose workspace
+ * 
+ * @author NailykSturm
  */
 public class WelcomePanel extends JPanel {
 
     private AppWindow appWindow;
 
-    // Constructor
+    /**
+     * Constructor of the class
+     * @param mainWindow main window of the application
+     */
     public WelcomePanel(AppWindow mainWindow) {
         this.appWindow = mainWindow;
         setLayout(new BorderLayout());
@@ -30,7 +35,10 @@ public class WelcomePanel extends JPanel {
 
     // ======= Elements =======
 
-    // Welcome message
+    /**
+     * Function that create a welcome message for the user
+     * @return the JPanel created
+     */
     private JPanel message() {
         JPanel messagePanel = new JPanel();
         messagePanel.setLayout(new BorderLayout());

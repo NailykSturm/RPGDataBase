@@ -8,18 +8,29 @@ import javax.swing.JTextField;
 
 import model.rpg.RPGInfo;
 
+/**
+ * This class is the class that manage the bestiary form.
+ * 
+ * @author NailykSturm
+ */
 public class BestiaryForm implements Serializable {
 
     private final static long serialVersionUID = 21L;
+    /** Initial size for JTextFields */
     public final static int SIZE_JTEXTFIELD = 15;
+    /* List of options for fields */
+    /** The field is required to create entity */
     public final static String OPT_REQUIRED = "REQUIRED";
+    /** The field is editable */
     public final static String OPT_EDITABLE = "EDITABLE";
+    /** The field is a counter */
     public final static String OPT_COUNTER = "COUNTER";
+    /** Tje field is a check box */
     public final static String OPT_CHECKBOX = "CHECKBOX";
+    /** The field have a time to be reloaded */
     public final static String OPT_TIME_TO_RELOAD = "TIME TO RELOAD";
+    /** The field is unique */
     public final static String OPT_UNIQUE = "UNIQUE";
-    public final static String OPT_PNJ = "PNJ";
-    public final static String OPT_PJ = "PJ";
 
     /** RPG  */
     private RPGInfo rpg;
@@ -28,6 +39,10 @@ public class BestiaryForm implements Serializable {
     /** HashMap of all options of all fields with their name as key */
     private HashMap<String, ArrayList<String>> fieldsOptions;
 
+    /**
+     * Constructor of the class.
+     * @param rpg the model used for this form.
+     */
     public BestiaryForm(RPGInfo rpg) {
         this.rpg = rpg;
         fieldsMap = new HashMap<String, JTextField>();
@@ -70,6 +85,11 @@ public class BestiaryForm implements Serializable {
         SaveBestiary.saveBestiaryFormToFile(this, rpg);
     }
 
+    /**
+     * Get the HashMap of all the options for the fields
+     * 
+     * @return the HashMap of all the options
+     */
     public HashMap<String, String> getOptions() {
         HashMap<String, String> options = new HashMap<String, String>();
 
@@ -79,8 +99,6 @@ public class BestiaryForm implements Serializable {
         options.put(OPT_CHECKBOX, "Is a checkbox ?");
         options.put(OPT_TIME_TO_RELOAD, "Have a time to reload ?");
         options.put(OPT_UNIQUE, "Is unique ?");
-        //options.put(OPT_PNJ, "Is a PNJ ?");
-        //options.put(OPT_PJ, "Is a PJ ?");
 
         return options;
     }
@@ -111,6 +129,10 @@ public class BestiaryForm implements Serializable {
         return fieldsOptions;
     }
 
+    /**
+     * Check if every global variable hase been initialized
+     * @param rpg the model used for this form.
+     */
     public void checkIfEverythingIsLoaded(RPGInfo rpg) {
         if (fieldsMap == null)
             fieldsMap = new HashMap<String, JTextField>();

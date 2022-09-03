@@ -7,6 +7,11 @@ import model.bestiary.BestiaryEntity;
 import model.bestiary.BestiaryInfo;
 import view.bestiary.BestiaryMainPanel;
 
+/**
+ * Listener used to delete an entity
+ * 
+ * @author NailykSturm
+ */
 public class DeleteEntityAction implements ActionListener {
 
     private BestiaryMainPanel bestiaryMainPanel;

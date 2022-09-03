@@ -10,6 +10,11 @@ import javax.swing.JCheckBox;
 import model.bestiary.BestiaryForm;
 import view.bestiary.BestiaryFormPanel;
 
+/**
+ * Listener used to editing a field
+ * 
+ * @author NailykSturm
+ */
 public class EditFieldAction implements ActionListener {
 
     private BestiaryFormPanel bestiaryFormPanel;

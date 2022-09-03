@@ -9,6 +9,11 @@ import model.rpg.RPGControler;
 import view.bestiary.BestiaryMainPanel;
 import view.common.AppWindow;
 
+/**
+ * Listener used to create a new RPG database
+ * 
+ * @author NailykSturm
+ */
 public class ValidateRPGAction implements ActionListener {
     
     private AppWindow appWindow;

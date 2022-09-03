@@ -9,6 +9,7 @@ import view.common.AppWindow;
 
 /**
  * Application Main class
+ * 
  * @author NailykSturm
  */
 public class StartApp {

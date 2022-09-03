@@ -9,12 +9,25 @@ import model.bestiary.BestiaryInfo;
 import view.common.AppWindow;
 import view.common.MenuPanel;
 
+/**
+ * View of all the bestiary
+ * Control the data showed
+ * 
+ * @author NailykSturm
+ */
 public class BestiaryMainPanel extends JPanel {
 
     private AppWindow appWindow;
+    /** The form panel showed as child */
     private BestiaryFormPanel bestiaryFormPanel;
+    /** The bestiary used */
     private BestiaryInfo bestiary;
 
+    /**
+     * Constructor 
+     * @param appWindow Application main frame
+     * @param bestiaryInfo the bestiary used for this RPG
+     */
     public BestiaryMainPanel(AppWindow appWindow, BestiaryInfo bestiaryInfo) {
         this.appWindow = appWindow;
         this.bestiary = bestiaryInfo;
@@ -26,6 +39,10 @@ public class BestiaryMainPanel extends JPanel {
         this.add(bestiaryPanel(), BorderLayout.CENTER);
     }
 
+    /**
+     * Create an information panel
+     * @return the information panel created
+     */
     private JPanel infoPanel() {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
@@ -35,6 +52,10 @@ public class BestiaryMainPanel extends JPanel {
         return infoPanel;
     }
 
+    /**
+     * Create a panel for the bestiary
+     * @return this bestiary panel
+     */
     private JPanel bestiaryPanel() {
         JPanel bestiaryPanel = new JPanel();
         bestiaryPanel.setLayout(new BorderLayout());
@@ -43,6 +64,9 @@ public class BestiaryMainPanel extends JPanel {
         return bestiaryPanel;
     }
 
+    /**
+     * Refresh all data showed
+     */
     public void refresh() {
         bestiaryFormPanel.refresh();
         this.removeAll();
@@ -52,6 +76,10 @@ public class BestiaryMainPanel extends JPanel {
         this.repaint();
     }
 
+    /**
+     * getter of the form panel saved in the Main bestiary's panel
+     * @return the form panel
+     */
     public BestiaryFormPanel getFormPanel() {
         return this.bestiaryFormPanel;
     }

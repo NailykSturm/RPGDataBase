@@ -6,13 +6,18 @@ import java.awt.event.ActionListener;
 import model.bestiary.BestiaryInfo;
 import view.bestiary.BestiaryFormPanel;
 
-public class DeleteFieldRequest implements ActionListener {
+/**
+ * Listener used to delete a field from the bestiary's form
+ * 
+ * @author NailykSturm
+ */
+public class DeleteFieldAction implements ActionListener {
 
     private String key;
     private BestiaryFormPanel bestiaryFormPanel;
     private BestiaryInfo bestiary;
 
-    public DeleteFieldRequest(String key, BestiaryInfo bestiary, BestiaryFormPanel bestiaryFormPanel) {
+    public DeleteFieldAction(String key, BestiaryInfo bestiary, BestiaryFormPanel bestiaryFormPanel) {
         this.key = key;
         this.bestiary = bestiary;
         this.bestiaryFormPanel = bestiaryFormPanel;

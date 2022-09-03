@@ -6,8 +6,17 @@ import java.io.ObjectOutputStream;
 
 import model.main.StartApp;
 
+/**
+ * Class that save the RPGs in a file
+ * 
+ * @author NailykSturm
+ */
 public class SaveRPG {
 
+    /**
+     * Save the RPGs into a file
+     * @param rpgControler the RPGControler to save
+     */
     public static void saveRPGToFile(RPGControler rpgControler) {
         try {
             ObjectOutputStream oos_rpg = new ObjectOutputStream(new FileOutputStream(StartApp.FOLDER + StartApp.RPG_FILE + StartApp.EXTENSION));

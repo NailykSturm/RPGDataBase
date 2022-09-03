@@ -12,6 +12,11 @@ import model.bestiary.BestiaryInfo;
 import view.bestiary.BestiaryFormPanel;
 import view.bestiary.BestiaryMainPanel;
 
+/** 
+ * Listener used for editing an entity
+ * 
+ * @author NailykSturm
+ */
 public class EditBestiaryAction implements ActionListener {
 
     private BestiaryMainPanel bestiaryMainPanel;
@@ -32,9 +37,11 @@ public class EditBestiaryAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         HashMap<String, JTextField> characs = bestiaryFormPanel.getBestiaryFormHashMap();
+        HashMap<String, String> newCharacs = new HashMap<String, String>();
         for (String key : characs.keySet()) {
-            bestiary.editEntity(entity, key, entity.getCaracteristics().get(key), characs.get(key).getText());
+            newCharacs.put(key, characs.get(key).getText());
         }
+        bestiary.editEntity(entity, newCharacs);
         bestiaryForm.resetAllFields();
         bestiaryFormPanel.changeEntityToAdd();
         bestiaryMainPanel.refresh();

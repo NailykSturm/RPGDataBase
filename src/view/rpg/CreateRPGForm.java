@@ -15,10 +15,19 @@ import listener.rpg.ValidateRPGAction;
 import view.common.AppWindow;
 import view.common.MenuPanel;
 
+/** 
+ * View of the form for creating a new RPG
+ * 
+ * @author NailykSturm
+ */
 public class CreateRPGForm extends JPanel {
 
     private AppWindow appWindow;
 
+    /**
+     * Constructor of the class
+     * @param appWindow parent window of this form
+     */
     public CreateRPGForm(AppWindow appWindow) {
         this.appWindow = appWindow;
         this.setLayout(new BorderLayout());
