@@ -38,12 +38,13 @@ public class BestiaryMainPanel extends JPanel {
     private JPanel bestiaryPanel() {
         JPanel bestiaryPanel = new JPanel();
         bestiaryPanel.setLayout(new BorderLayout());
-        bestiaryPanel.add(new BestiaryListPanel(bestiary).getPanel(), BorderLayout.CENTER);
+        bestiaryPanel.add(new BestiaryListPanel(bestiary, this).getPanel(), BorderLayout.CENTER);
         bestiaryPanel.add(bestiaryFormPanel.getPanel(), BorderLayout.EAST);
         return bestiaryPanel;
     }
 
     public void refresh() {
+        bestiaryFormPanel.refresh();
         this.removeAll();
         this.add(infoPanel(), BorderLayout.NORTH);
         this.add(bestiaryPanel(), BorderLayout.CENTER);

@@ -17,6 +17,7 @@ public class BestiaryForm implements Serializable {
     public final static String OPT_COUNTER = "COUNTER";
     public final static String OPT_CHECKBOX = "CHECKBOX";
     public final static String OPT_TIME_TO_RELOAD = "TIME TO RELOAD";
+    public final static String OPT_UNIQUE = "UNIQUE";
     public final static String OPT_PNJ = "PNJ";
     public final static String OPT_PJ = "PJ";
 
@@ -77,6 +78,7 @@ public class BestiaryForm implements Serializable {
         options.put(OPT_COUNTER, "Field is a counter ? (means editable)");
         options.put(OPT_CHECKBOX, "Is a checkbox ?");
         options.put(OPT_TIME_TO_RELOAD, "Have a time to reload ?");
+        options.put(OPT_UNIQUE, "Is unique ?");
         //options.put(OPT_PNJ, "Is a PNJ ?");
         //options.put(OPT_PJ, "Is a PJ ?");
 

@@ -10,13 +10,13 @@ import javax.swing.JCheckBox;
 import model.bestiary.BestiaryForm;
 import view.bestiary.BestiaryFormPanel;
 
-public class EditFielAction implements ActionListener {
+public class EditFieldAction implements ActionListener {
 
     private BestiaryFormPanel bestiaryFormPanel;
     private String fieldName;
     private BestiaryForm bestiary;
 
-    public EditFielAction(String editField, BestiaryForm bestiaryForm,
+    public EditFieldAction(String editField, BestiaryForm bestiaryForm,
             BestiaryFormPanel bestiaryFormPanel) {
         this.fieldName = editField;
         this.bestiaryFormPanel = bestiaryFormPanel;

@@ -6,19 +6,23 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import listener.bestiary.DeleteEntityAction;
 import model.bestiary.BestiaryEntity;
 import model.bestiary.BestiaryInfo;
 
 public class BestiaryListPanel extends JPanel {
 
     private BestiaryInfo bestiary;
+    private BestiaryMainPanel bestiaryMainPanel;
 
-    public BestiaryListPanel(BestiaryInfo bestiary) {
+    public BestiaryListPanel(BestiaryInfo bestiary, BestiaryMainPanel bestiaryMainPanel) {
         this.bestiary = bestiary;
+        this.bestiaryMainPanel = bestiaryMainPanel;
         this.setLayout(new BorderLayout());
         this.add(infoPanel(), BorderLayout.NORTH);
         this.add(mainPanel(), BorderLayout.CENTER);
@@ -46,9 +50,15 @@ public class BestiaryListPanel extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 0, 5, 0);
         gbc.gridx = 0;
-            gbc.gridy = -1;
+        gbc.gridy = -1;
         for (BestiaryEntity entity : bestiary.getEntities()) {
-            mainPanel.add(new BestiaryEntityPanel(entity).getPanel(), gbc);
+            gbc.gridx = 0;
+            gbc.gridy = -1;
+            mainPanel.add(new BestiaryEntityPanel(entity, bestiaryMainPanel).getPanel(), gbc);
+            gbc.gridx = 1;
+            JButton deleteButton = new JButton("Delete");
+            deleteButton.addActionListener(new DeleteEntityAction(entity, bestiary, bestiaryMainPanel));
+            mainPanel.add(deleteButton, gbc);
         }
         return scrollPane;
     }

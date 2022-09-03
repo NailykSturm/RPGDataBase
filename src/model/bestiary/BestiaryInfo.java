@@ -51,7 +51,7 @@ public class BestiaryInfo implements Serializable {
      * Edit an entity from the bestiary
      */
     public void editEntity(BestiaryEntity entity, String fieldToChange, String oldValue, String newValue) {
-        entity.editCaracteristic(fieldToChange, oldValue, newValue);
+        entity.editCharacteristic(fieldToChange, oldValue, newValue);
         SaveBestiary.saveBestiaryTofile(entities, rpg);
     }
 

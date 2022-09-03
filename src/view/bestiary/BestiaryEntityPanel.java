@@ -10,14 +10,17 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import listener.bestiary.EditEntityRequest;
 import model.bestiary.BestiaryEntity;
 
 public class BestiaryEntityPanel extends JPanel {
 
     private BestiaryEntity entity;
+    private BestiaryMainPanel bestiaryMainPanel;
 
-    public BestiaryEntityPanel(BestiaryEntity entity) {
+    public BestiaryEntityPanel(BestiaryEntity entity, BestiaryMainPanel bestiaryMainPanel) {
         this.entity = entity;
+        this.bestiaryMainPanel = bestiaryMainPanel;
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         this.setLayout(new BorderLayout());
@@ -30,6 +33,7 @@ public class BestiaryEntityPanel extends JPanel {
 
     private JPanel entityPanel() {
         JPanel entityPanel = new JPanel();
+        entityPanel.addMouseListener(new EditEntityRequest(entity, bestiaryMainPanel));
         entityPanel.setBackground(Color.YELLOW);
         entityPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -41,5 +45,12 @@ public class BestiaryEntityPanel extends JPanel {
             entityPanel.add(new JLabel(field + " : " + entity.getCaracteristics().get(field)), gbc);
         }
         return entityPanel;
+    }
+
+    public void refresh() {
+        this.removeAll();
+        this.add(entityPanel(), BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
     }
 }
