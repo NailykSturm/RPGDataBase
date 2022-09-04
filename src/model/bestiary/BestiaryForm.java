@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JTextField;
-
 import model.rpg.RPGInfo;
 
 /**
@@ -32,21 +30,19 @@ public class BestiaryForm implements Serializable {
     /** The field is unique */
     public final static String OPT_UNIQUE = "UNIQUE";
 
-    /** RPG  */
+    /** RPG */
     private RPGInfo rpg;
-    /** HashMap of all the fields with name as key */
-    private HashMap<String, JTextField> fieldsMap;
-    /** HashMap of all options of all fields with their name as key */
-    private HashMap<String, ArrayList<String>> fieldsOptions;
+    /** List of fields */
+    private ArrayList<BestiaryFieldForm> fields;
 
     /**
      * Constructor of the class.
      * @param rpg the model used for this form.
      */
     public BestiaryForm(RPGInfo rpg) {
+        System.out.println("DEBUG => BestiaryForm.Constructor => On créer une nouvelle instance de BestiaryForm");
         this.rpg = rpg;
-        fieldsMap = new HashMap<String, JTextField>();
-        fieldsOptions = new HashMap<String, ArrayList<String>>();
+        fields = LoadBestiary.loadBestiaryFormFromFile(rpg);
     }
 
     /**
@@ -55,10 +51,9 @@ public class BestiaryForm implements Serializable {
      * @param fieldName the name used to reference it
      */
     public void addField(String fieldName, ArrayList<String> options) {
-        JTextField field = new JTextField(SIZE_JTEXTFIELD);
-        fieldsMap.putIfAbsent(fieldName, field);
-        fieldsOptions.putIfAbsent(fieldName, options);
-        SaveBestiary.saveBestiaryFormToFile(this, rpg);
+        BestiaryFieldForm field = new BestiaryFieldForm(fieldName, options);
+        fields.add(field);
+        SaveBestiary.saveBestiaryFormToFile(fields, rpg);
     }
 
     /**
@@ -67,8 +62,16 @@ public class BestiaryForm implements Serializable {
      * @param fieldName the name used to reference it
      */
     public void removeField(String fieldName) {
-        fieldsMap.remove(fieldName);
-        SaveBestiary.saveBestiaryFormToFile(this, rpg);
+        BestiaryFieldForm field = null;
+        for (BestiaryFieldForm f : fields) {
+            if (f.getName().equals(fieldName)) {
+                field = f;
+                break;
+            }
+        }
+        if (field != null)
+            fields.remove(field);
+        SaveBestiary.saveBestiaryFormToFile(fields, rpg);
     }
 
     /**
@@ -78,17 +81,22 @@ public class BestiaryForm implements Serializable {
      * @param options   the option of the field
      */
     public void editField(String fieldName, ArrayList<String> options) {
-        if (fieldsOptions.get(fieldName) == null)
-            fieldsOptions.put(fieldName, options);
-        else
-            fieldsOptions.replace(fieldName, options);
-        SaveBestiary.saveBestiaryFormToFile(this, rpg);
+        BestiaryFieldForm field = null;
+        for (BestiaryFieldForm f : fields) {
+            if (f.getName().equals(fieldName)) {
+                field = f;
+                break;
+            }
+        }
+        if (field != null) {
+            field.editOptions(options);
+        }
+        SaveBestiary.saveBestiaryFormToFile(fields, rpg);
     }
 
     /**
-     * Get the HashMap of all the options for the fields
      * 
-     * @return the HashMap of all the options
+     * @return the HashMap with all field options available and their description
      */
     public HashMap<String, String> getOptions() {
         HashMap<String, String> options = new HashMap<String, String>();
@@ -107,38 +115,56 @@ public class BestiaryForm implements Serializable {
      * Reset all the fields of the form
      */
     public void resetAllFields() {
-        for (String key : fieldsMap.keySet()) {
-            fieldsMap.get(key).setText("");
+        for (BestiaryFieldForm field : fields) {
+            field.reset();
         }
-        SaveBestiary.saveBestiaryFormToFile(this, rpg);
+        SaveBestiary.saveBestiaryFormToFile(fields, rpg);
     }
 
     /**
      * Get all fields of the form
+     * 
      * @return HashMap of fields with JTextFields and name as key
      */
-    public HashMap<String, JTextField> getFields() {
-        return fieldsMap;
+    public HashMap<String, BestiaryFieldForm> getFields() {
+        HashMap<String, BestiaryFieldForm> fields = new HashMap<String, BestiaryFieldForm>();
+        for (BestiaryFieldForm field : this.fields) {
+            fields.put(field.getName(), field);
+        }
+        return fields;
     }
 
     /**
      * Get the options of all fields of the form
+     * 
      * @return HashMap of fields with options and name as key
      */
     public HashMap<String, ArrayList<String>> getFieldsOptions() {
+        HashMap<String, ArrayList<String>> fieldsOptions = new HashMap<String, ArrayList<String>>();
+        for (BestiaryFieldForm field : this.fields) {
+            fieldsOptions.put(field.getName(), field.getOptions());
+        }
         return fieldsOptions;
     }
 
     /**
-     * Check if every global variable hase been initialized
-     * @param rpg the model used for this form.
+     * Check if any global variable are correctly initialized
+     * @param rpg the rpg to set
      */
     public void checkIfEverythingIsLoaded(RPGInfo rpg) {
-        if (fieldsMap == null)
-            fieldsMap = new HashMap<String, JTextField>();
-        if (fieldsOptions == null)
-            fieldsOptions = new HashMap<String, ArrayList<String>>();
+        System.out.println("DEBUG : BestiaryForm.checkIfEverythingIsLoaded => fields = " + fields);
+        if (fields == null) {
+            fields = LoadBestiary.loadBestiaryFormFromFile(rpg);
+        }
         if (rpg == null)
             this.rpg = rpg;
+    }
+
+    public String isRealyLoaded() {
+        System.out.println("DEBUG => BestiaryForm.isRealyLoaded => We try to see if anything is loaded");
+        for (BestiaryFieldForm field : fields) {
+            System.out.println("DEBUG => BestiaryForm.isRealyLoaded => field = " + field.getName());
+        }
+        return "Yes";
     }
 }

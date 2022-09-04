@@ -4,9 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-import javax.swing.JTextField;
-
 import model.bestiary.BestiaryEntity;
+import model.bestiary.BestiaryFieldForm;
 import model.bestiary.BestiaryForm;
 import model.bestiary.BestiaryInfo;
 import view.bestiary.BestiaryFormPanel;
@@ -36,12 +35,12 @@ public class EditBestiaryAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        HashMap<String, JTextField> characs = bestiaryFormPanel.getBestiaryFormHashMap();
-        HashMap<String, String> newCharacs = new HashMap<String, String>();
+        HashMap<String, BestiaryFieldForm> characs = bestiaryFormPanel.getBestiaryFormHashMap();
+        HashMap<String, String> characsValue = new HashMap<>();
         for (String key : characs.keySet()) {
-            newCharacs.put(key, characs.get(key).getText());
+            characsValue.put(key, characs.get(key).getValue());
         }
-        bestiary.editEntity(entity, newCharacs);
+        bestiary.editEntity(entity, characsValue);
         bestiaryForm.resetAllFields();
         bestiaryFormPanel.changeEntityToAdd();
         bestiaryMainPanel.refresh();

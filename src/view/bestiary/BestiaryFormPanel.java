@@ -17,13 +17,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import listener.bestiary.AddBestiaryAction;
-import listener.bestiary.AddField;
+import listener.bestiary.AddFieldAction;
 import listener.bestiary.DeleteFieldAction;
 import listener.bestiary.EditBestiaryAction;
 import listener.bestiary.EditFieldAction;
 import listener.bestiary.EditFieldRequest;
 import listener.bestiary.ResetBestiaryForm;
 import model.bestiary.BestiaryEntity;
+import model.bestiary.BestiaryFieldForm;
 import model.bestiary.BestiaryForm;
 import model.bestiary.BestiaryInfo;
 
@@ -42,13 +43,7 @@ public class BestiaryFormPanel extends JPanel {
     private static final String ADD_ENTITY_MODE = "Add Entity";
     /** Mode of editing an entity */
     private static final String EDIT_ENTITY_MODE = "Edit Entity";
-    /** The entity's adding button */
-    private JButton addButton;
-    /** The entity's editing button */
-    private JButton editButton;
-    /** The HashMap of JTextField of the form */
-    private HashMap<String, JTextField> bestiaryFormHashMap;
-    /** The HashMap of JCheckBox for field options */
+    private HashMap<String, BestiaryFieldForm> bestiaryFormHashMap;
     private HashMap<String, JCheckBox> checkBoxes;
     /** The bestiary's main panel */
     private BestiaryMainPanel mainPanel;
@@ -85,33 +80,12 @@ public class BestiaryFormPanel extends JPanel {
             JCheckBox checkBox = new JCheckBox(fieldsOptions.get(key));
             checkBoxes.put(key, checkBox);
         }
-        setAddButton();
         this.setLayout(new BorderLayout());
-        this.add(infoPanel(addButton), BorderLayout.NORTH);
+        this.add(infoPanel(), BorderLayout.NORTH);
         this.add(scrollPanel(), BorderLayout.CENTER);
         this.add(addFieldPanel(), BorderLayout.SOUTH);
     }
 
-    /**
-     * refresh the data used by the adding button
-     */
-    private void setAddButton(){
-        addButton = new JButton("Add your entity to the bestiary");
-        addButton.addActionListener(new AddBestiaryAction(mainPanel, bestiary));
-    }
-
-    /**
-     * refresh data used for the edit button
-     */
-    private void setEditButton() {
-        editButton = new JButton("Edit your entity in the bestiary");
-        editButton.addActionListener(new EditBestiaryAction(this, mainPanel, bestiary, bestiaryForm, editEntity));
-    }
-
-    /**
-     * Getter of the JPanel of the form
-     * @return the form's JPanel
-     */
     public JPanel getPanel() {
         return this;
     }
@@ -120,11 +94,13 @@ public class BestiaryFormPanel extends JPanel {
      * Refresh the display
      */
     public void refresh() {
+        this.bestiaryForm = bestiary.getCurrentForm();
+        this.bestiaryFormHashMap = bestiaryForm.getFields();
+        for(JCheckBox checkBox : checkBoxes.values()) {
+            checkBox.setSelected(false);
+        }
         this.removeAll();
-        if (this.entity_mode == ADD_ENTITY_MODE)
-            this.add(infoPanel(addButton), BorderLayout.NORTH);
-        else
-            this.add(infoPanel(editButton), BorderLayout.NORTH);
+        this.add(infoPanel(), BorderLayout.NORTH);
         this.add(scrollPanel(), BorderLayout.CENTER);
         this.add(addFieldPanel(), BorderLayout.SOUTH);
         this.revalidate();
@@ -154,7 +130,6 @@ public class BestiaryFormPanel extends JPanel {
     public void changeEntityToEdit(BestiaryEntity entity) {
         this.entity_mode = EDIT_ENTITY_MODE;
         this.editEntity = entity;
-        this.setEditButton();
     }
 
     /**
@@ -163,14 +138,13 @@ public class BestiaryFormPanel extends JPanel {
     public void changeEntityToAdd() {
         this.entity_mode = ADD_ENTITY_MODE;
         this.editEntity = null;
-        this.setAddButton();
     }
 
     /**
      * Getter of all the fields 
      * @return the HashMap of the fields
      */
-    public HashMap<String, JTextField> getBestiaryFormHashMap() {
+    public HashMap<String, BestiaryFieldForm> getBestiaryFormHashMap() {
         return bestiaryFormHashMap;
     }
 
@@ -200,7 +174,7 @@ public class BestiaryFormPanel extends JPanel {
 
         HashMap<String, ArrayList<String>> options = bestiaryForm.getFieldsOptions();
         HashMap<String, String> entityCharacs = null;
-        if(entity_mode == EDIT_ENTITY_MODE && editEntity != null) 
+        if (entity_mode == EDIT_ENTITY_MODE && editEntity != null)
             entityCharacs = editEntity.getCaracteristics();
 
         for (String key : bestiaryFormHashMap.keySet()) {
@@ -216,13 +190,13 @@ public class BestiaryFormPanel extends JPanel {
             field.add(new JLabel(key), gbcField);
 
             gbcField.gridx = GridBagConstraints.RELATIVE;
-            if(this.entity_mode == EDIT_ENTITY_MODE && editEntity != null && entityCharacs != null) {
+            if (this.entity_mode == EDIT_ENTITY_MODE && editEntity != null && entityCharacs != null) {
                 System.out.println("DEBUG : l'entité édité est : " + editEntity);
-                JTextField textField = bestiaryFormHashMap.get(key);
-                textField.setText(entityCharacs.get(key));
-                field.add(textField, gbcField);
+                BestiaryFieldForm fieldComponent = bestiaryFormHashMap.get(key);
+                fieldComponent.setValue(entityCharacs.get(key));
+                field.add(fieldComponent.getComponent(), gbcField);
             } else {
-                field.add(bestiaryFormHashMap.get(key), gbcField);
+                field.add(bestiaryFormHashMap.get(key).getComponent(), gbcField);
             }
 
             gbcField.gridx = GridBagConstraints.RELATIVE;
@@ -248,7 +222,7 @@ public class BestiaryFormPanel extends JPanel {
     }
 
     // Northen information panel
-    private JPanel infoPanel(JButton addOrEditButton) {
+    private JPanel infoPanel() {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -256,7 +230,15 @@ public class BestiaryFormPanel extends JPanel {
         gbc.insets = new Insets(5, 1, 5, 1);
         JButton resetButton = new JButton("Reset form");
         resetButton.addActionListener(new ResetBestiaryForm(bestiaryForm, this));
-        infoPanel.add(addOrEditButton, gbc);
+        if (field_mode == ADD_FIELD_MODE) {
+            JButton addButton = new JButton("Add your entity to the bestiary");
+            addButton.addActionListener(new AddBestiaryAction(mainPanel, bestiary));
+            infoPanel.add(addButton, gbc);
+        } else if (field_mode == EDIT_FIELD_MODE) {
+            JButton editButton = new JButton("Edit your entity in the bestiary");
+            editButton.addActionListener(new EditBestiaryAction(this, mainPanel, bestiary, bestiaryForm, editEntity));
+            infoPanel.add(editButton, gbc);
+        }
         infoPanel.add(new JLabel("Form to add entity"), gbc);
         infoPanel.add(resetButton, gbc);
         return infoPanel;
@@ -274,7 +256,7 @@ public class BestiaryFormPanel extends JPanel {
             fieldToAdd.setEditable(false);
             validate.addActionListener(new EditFieldAction(editField, bestiaryForm, this));
         } else {
-            validate.addActionListener(new AddField(this, fieldToAdd, bestiaryForm));
+            validate.addActionListener(new AddFieldAction(this, fieldToAdd, bestiaryForm));
         }
 
         addField.setLayout(new GridBagLayout());

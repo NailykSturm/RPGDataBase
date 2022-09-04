@@ -14,14 +14,12 @@ import model.rpg.RPGInfo;
 public class BestiaryInfo implements Serializable {
 
     private static final long serialVersionUID = 20L;
-    private static int idBestiary = 0;
 
-    private int id;
-    /** List of all the entities */
+    /** List of entities */
     private ArrayList<BestiaryEntity> entities;
-    /** The form of the bestiary */
+    /** Form model */
     private BestiaryForm form;
-    /** The RPG of the bestiary */
+    /** Current RPG */
     private RPGInfo rpg;
 
     /**
@@ -29,12 +27,10 @@ public class BestiaryInfo implements Serializable {
      * @param rpg the model used for the rpg
      */
     public BestiaryInfo(RPGInfo rpg) {
-        this.id = idBestiary;
+        System.out.println("DEBUG => BestiaryInfo.Constructor => Creating bestiary for " + rpg.getName());
         this.rpg = rpg;
         this.entities = LoadBestiary.loadBestiary(rpg);
-        this.form = LoadBestiary.loadBestiaryFormFromFile(rpg);
-        idBestiary++;
-        System.out.println("New bestiary created with id " + id);
+        this.form = new BestiaryForm(rpg);
     }
 
     /**
@@ -79,5 +75,11 @@ public class BestiaryInfo implements Serializable {
      */
     public BestiaryForm getCurrentForm() {
         return form;
+    }
+
+    public String isRealyLoaded() {
+        System.out.println("DEBUG => BestiaryInfo.isRealyLoaded => Bestiary's entities : " + entities.size());
+        System.out.println("DEBUG => BestiaryInfo.isRealyLoaded => Form : " + form.isRealyLoaded());
+        return "Yes";
     }
 }

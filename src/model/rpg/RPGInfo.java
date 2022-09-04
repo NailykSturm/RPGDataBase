@@ -35,12 +35,12 @@ public class RPGInfo implements Serializable {
      * @param name the name of the RPG
      */
     public RPGInfo(RPGControler rpgControler, String name) {
+        System.out.println("DEBUG => RPGInfo.Constructor => Creating new RPGInfo for " + name);
         this.name = name;
         this.id = idRPG;
         this.rpgControler = rpgControler;
         this.bestiary = new BestiaryInfo(this);
-        this.bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(new ArrayList<BestiaryForm>(),
-                this.rpgControler);
+        this.bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(this.rpgControler);
         idRPG++;
         System.out.println("RPG n°" + id + " => " + name + " created");
     }
@@ -71,12 +71,14 @@ public class RPGInfo implements Serializable {
      * @param rpgControler the controller used by this RPG
      */
     public void checkIfEverythingIsLoaded(RPGControler rpgControler) {
+        System.out.println("DEBUG => RPGInfo.checkIfEverythingIsLoaded => Checking if everything is loaded for " + this.name);
         if (bestiary == null)
             bestiary = new BestiaryInfo(this);
+            System.out.println("DEBUG => RPGInfo.checkIfEverythingIsLoaded => Bestiary loaded : " + bestiary.isRealyLoaded());
         if (rpgControler != null)
             this.rpgControler = rpgControler;
         if (bestiaryFormTemplates == null)
-            bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(new ArrayList<BestiaryForm>(), rpgControler);
+            bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(rpgControler);
     }
 
     /**

@@ -28,7 +28,7 @@ public class LoadBestiary {
 
         try {
             ois_entity = new ObjectInputStream(new FileInputStream(
-                    StartApp.FOLDER + StartApp.BESTIARY_FILE + StartApp.BESTIARY_ENTITY + "_" + rpg.getName()
+                    StartApp.FOLDER + StartApp.BESTIARY_FILE + "_" + StartApp.BESTIARY_ENTITY + "_" + rpg.getName()
                             + StartApp.EXTENSION));
             entities = (ArrayList<BestiaryEntity>) ois_entity.readObject();
             ois_entity.close();
@@ -58,27 +58,29 @@ public class LoadBestiary {
      * Load the last form used
      * @param rpg the rpg used by the bestiary
      */
-    public static BestiaryForm loadBestiaryFormFromFile(RPGInfo rpg) {
+    @SuppressWarnings("unchecked")
+    public static ArrayList<BestiaryFieldForm> loadBestiaryFormFromFile(RPGInfo rpg) {
+        System.out.println("Loading form of " + rpg.getName());
         ObjectInputStream ois_rpg;
-        BestiaryForm form;
+        ArrayList<BestiaryFieldForm> form = new ArrayList<>();
 
         try {
             ois_rpg = new ObjectInputStream(new FileInputStream(
                     StartApp.FOLDER + StartApp.BESTIARY_FILE + "_" + StartApp.BESTIARY_FORM_FILE + "_" + rpg.getName()
                             + StartApp.EXTENSION));
-            form = (BestiaryForm) ois_rpg.readObject();
-            form.checkIfEverythingIsLoaded(rpg);
+            form = (ArrayList<BestiaryFieldForm>) ois_rpg.readObject();
             ois_rpg.close();
+            System.out.println("DEBUG => LoadBestiary : the arrayList loaded is : " + form.toString());
+            for(BestiaryFieldForm field : form) {
+                field.checkIfEverythingIsLoaded();
+            }
         } catch (FileNotFoundException eFNF) {
             System.out.println("Error append when loading form of " + rpg.getName() + " => File not found");
-            form = new BestiaryForm(rpg);
         } catch (IOException eIO) {
             System.out.println("Error append when loading form of " + rpg.getName() + " => IOException");
-            form = new BestiaryForm(rpg);
             eIO.printStackTrace();
         } catch (ClassNotFoundException eCNFE) {
             System.out.println("Error append when loading form of " + rpg.getName() + " => Class not found");
-            form = new BestiaryForm(rpg);
             eCNFE.printStackTrace();
         }
         return form;
@@ -89,7 +91,8 @@ public class LoadBestiary {
      * @param form the form to load
      * @param rpgs the rpg used by the bestiary
      */
-    public static ArrayList<BestiaryForm> loadBestiaryTemplate(ArrayList<BestiaryForm> form, RPGControler rpgs) {
+    public static ArrayList<BestiaryForm> loadBestiaryTemplate(RPGControler rpgs) {
+        ArrayList<BestiaryForm> form = new ArrayList<>();
         for (RPGInfo rpg : rpgs.getRPGList()) {
             ObjectInputStream ois_rpg;
             try {

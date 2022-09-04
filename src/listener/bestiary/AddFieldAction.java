@@ -16,13 +16,13 @@ import view.bestiary.BestiaryFormPanel;
  * 
  * @author NailykSturm
  */
-public class AddField implements ActionListener {
+public class AddFieldAction implements ActionListener {
 
     private JTextField fieldToAdd;
     private BestiaryForm bestiaryForm;
     private BestiaryFormPanel bestiaryFormPanel;
 
-    public AddField(BestiaryFormPanel bestiaryFormPanel, JTextField fieldToAdd, BestiaryForm bestiaryForm) {
+    public AddFieldAction(BestiaryFormPanel bestiaryFormPanel, JTextField fieldToAdd, BestiaryForm bestiaryForm) {
         this.bestiaryFormPanel = bestiaryFormPanel;
         this.fieldToAdd = fieldToAdd;
         this.bestiaryForm = bestiaryForm;

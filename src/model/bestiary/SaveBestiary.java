@@ -23,7 +23,7 @@ public class SaveBestiary {
     public static void saveBestiaryTofile(ArrayList<BestiaryEntity> bestiary, RPGInfo rpg) {
         try {
             ObjectOutputStream oos_entity = new ObjectOutputStream(new FileOutputStream(
-                    StartApp.FOLDER + StartApp.BESTIARY_FILE + StartApp.BESTIARY_ENTITY + "_" + rpg.getName()
+                    StartApp.FOLDER + StartApp.BESTIARY_FILE + "_" + StartApp.BESTIARY_ENTITY + "_" + rpg.getName()
                             + StartApp.EXTENSION));
             oos_entity.writeObject(bestiary);
             oos_entity.close();
@@ -38,12 +38,12 @@ public class SaveBestiary {
      * @param bestiaryForm the form to save
      * @param rpg the rpg used by the bestiary
      */
-    public static void saveBestiaryFormToFile(BestiaryForm bestiaryForm, RPGInfo rpg) {
+    public static void saveBestiaryFormToFile(ArrayList<BestiaryFieldForm> form, RPGInfo rpg) {
         try {
             ObjectOutputStream oos_rpg = new ObjectOutputStream(new FileOutputStream(
                     StartApp.FOLDER + StartApp.BESTIARY_FILE + "_" + StartApp.BESTIARY_FORM_FILE + "_" + rpg.getName()
                             + StartApp.EXTENSION));
-            oos_rpg.writeObject(bestiaryForm);
+            oos_rpg.writeObject(form);
             oos_rpg.close();
             System.out.println("Saving form of " + rpg.getName() + " done");
         } catch (IOException eIO) {
