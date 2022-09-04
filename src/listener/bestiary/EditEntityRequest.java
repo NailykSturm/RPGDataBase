@@ -24,7 +24,6 @@ public class EditEntityRequest implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("You are edditing the entity "+ entity);
         BestiaryFormPanel formPanel = bestiaryMainPanel.getFormPanel();
         formPanel.changeEntityToEdit(entity);
         bestiaryMainPanel.refresh();

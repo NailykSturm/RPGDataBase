@@ -27,7 +27,6 @@ public class BestiaryInfo implements Serializable {
      * @param rpg the model used for the rpg
      */
     public BestiaryInfo(RPGInfo rpg) {
-        System.out.println("DEBUG => BestiaryInfo.Constructor => Creating bestiary for " + rpg.getName());
         this.rpg = rpg;
         this.entities = LoadBestiary.loadBestiary(rpg);
         this.form = new BestiaryForm(rpg);
@@ -75,11 +74,5 @@ public class BestiaryInfo implements Serializable {
      */
     public BestiaryForm getCurrentForm() {
         return form;
-    }
-
-    public String isRealyLoaded() {
-        System.out.println("DEBUG => BestiaryInfo.isRealyLoaded => Bestiary's entities : " + entities.size());
-        System.out.println("DEBUG => BestiaryInfo.isRealyLoaded => Form : " + form.isRealyLoaded());
-        return "Yes";
     }
 }

@@ -70,7 +70,6 @@ public class LoadBestiary {
                             + StartApp.EXTENSION));
             form = (ArrayList<BestiaryFieldForm>) ois_rpg.readObject();
             ois_rpg.close();
-            System.out.println("DEBUG => LoadBestiary : the arrayList loaded is : " + form.toString());
             for(BestiaryFieldForm field : form) {
                 field.checkIfEverythingIsLoaded();
             }

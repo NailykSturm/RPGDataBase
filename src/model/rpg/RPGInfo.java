@@ -17,11 +17,9 @@ import model.bestiary.LoadBestiary;
 public class RPGInfo implements Serializable {
 
     private static final long serialVersionUID = 11L;
-    private static int idRPG = 0;
 
     /** Name of the RPG */
     private String name;
-    private int id;
     /** The controller used by this RPG */
     private RPGControler rpgControler;
     /** The bestiary of the RPG */
@@ -35,14 +33,10 @@ public class RPGInfo implements Serializable {
      * @param name the name of the RPG
      */
     public RPGInfo(RPGControler rpgControler, String name) {
-        System.out.println("DEBUG => RPGInfo.Constructor => Creating new RPGInfo for " + name);
         this.name = name;
-        this.id = idRPG;
         this.rpgControler = rpgControler;
         this.bestiary = new BestiaryInfo(this);
         this.bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(this.rpgControler);
-        idRPG++;
-        System.out.println("RPG n°" + id + " => " + name + " created");
     }
 
     /**
@@ -63,7 +57,7 @@ public class RPGInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "RPG n°" + id + " => " + name;
+        return "RPG => " + name;
     }
 
     /**
@@ -71,10 +65,7 @@ public class RPGInfo implements Serializable {
      * @param rpgControler the controller used by this RPG
      */
     public void checkIfEverythingIsLoaded(RPGControler rpgControler) {
-        System.out.println("DEBUG => RPGInfo.checkIfEverythingIsLoaded => Checking if everything is loaded for " + this.name);
-        if (bestiary == null)
-            bestiary = new BestiaryInfo(this);
-            System.out.println("DEBUG => RPGInfo.checkIfEverythingIsLoaded => Bestiary loaded : " + bestiary.isRealyLoaded());
+        bestiary = new BestiaryInfo(this);
         if (rpgControler != null)
             this.rpgControler = rpgControler;
         if (bestiaryFormTemplates == null)

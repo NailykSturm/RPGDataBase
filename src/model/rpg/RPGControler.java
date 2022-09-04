@@ -29,12 +29,10 @@ public class RPGControler implements Serializable {
      * @param rpgName the name of the new RPG
      */
     public void addRPG(String rpgName) {
-        System.out.println("DEBUG => RPGControler.addRPG => Adding new RPG " + rpgName);
         RPGInfo newRPG = new RPGInfo(this, rpgName);
         rpgList.add(newRPG);
         current = newRPG;
         saveRPG();
-        System.out.println(newRPG + " added");
     }
 
     /**
@@ -92,7 +90,6 @@ public class RPGControler implements Serializable {
      * Function that check if every global variables are correctly initialized
      */
     public void checkIfEverythingIsLoaded() {
-        System.out.println("DEBUG => RPGControler.checkIfEverythingIsLoaded => Checking if everything is loaded");
         for (RPGInfo rpg : rpgList) {
             rpg.checkIfEverythingIsLoaded(this);
         }

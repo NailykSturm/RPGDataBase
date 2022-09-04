@@ -163,10 +163,8 @@ public class BestiaryFieldForm implements Serializable {
      * Function that check if the field is correctly initialized
      */
     public void checkIfEverythingIsLoaded() {
-        System.out.println("Check if everything is loaded for the field " + name);
         if (options == null) {
             options = new ArrayList<String>();
-            System.out.println("BestiaryFieldForm: options was null");
         }
     }
 

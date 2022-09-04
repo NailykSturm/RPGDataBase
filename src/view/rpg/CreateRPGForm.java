@@ -45,7 +45,8 @@ public class CreateRPGForm extends JPanel {
 
     // Center form panel
     private JPanel formPanel() {
-        JTextField rpgName = new JTextField("Write your RPG name here");
+        JLabel helpLabel = new JLabel("Enter the name of the RPG below");
+        JTextField rpgName = new JTextField(15);
         JButton validate = new JButton("Validate");
         validate.addActionListener(new ValidateRPGAction(appWindow, rpgName));
         JButton cancel = new JButton("Cancel");
@@ -59,15 +60,20 @@ public class CreateRPGForm extends JPanel {
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
-        form.add(rpgName, c);
+        form.add(helpLabel, c);
 
         c.gridx = 0;
         c.gridy = 1;
+        c.gridwidth = 2;
+        form.add(rpgName, c);
+
+        c.gridx = 0;
+        c.gridy = 2;
         c.gridwidth = 1;
         form.add(validate, c);
 
         c.gridx = 1;
-        c.gridy = 1;
+        c.gridy = 2;
         c.gridwidth = 1;
         form.add(cancel, c);
 

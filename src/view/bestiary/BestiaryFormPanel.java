@@ -52,9 +52,9 @@ public class BestiaryFormPanel extends JPanel {
     /** The bestiary used */
     private BestiaryInfo bestiary;
     /** Mode for a fiel (add/edit) */
-    private String field_mode;
+    private String field_mode = ADD_FIELD_MODE;
     /** Mode for the entity (add/edit) */
-    private String entity_mode;
+    private String entity_mode = ADD_ENTITY_MODE;
     /** The field to edit (null if the field_mode is adding) */
     private String editField = null;
     /** The editing entity (null if the entity_mode is adding) */
@@ -191,7 +191,6 @@ public class BestiaryFormPanel extends JPanel {
 
             gbcField.gridx = GridBagConstraints.RELATIVE;
             if (this.entity_mode == EDIT_ENTITY_MODE && editEntity != null && entityCharacs != null) {
-                System.out.println("DEBUG : l'entité édité est : " + editEntity);
                 BestiaryFieldForm fieldComponent = bestiaryFormHashMap.get(key);
                 fieldComponent.setValue(entityCharacs.get(key));
                 field.add(fieldComponent.getComponent(), gbcField);
@@ -230,11 +229,11 @@ public class BestiaryFormPanel extends JPanel {
         gbc.insets = new Insets(5, 1, 5, 1);
         JButton resetButton = new JButton("Reset form");
         resetButton.addActionListener(new ResetBestiaryForm(bestiaryForm, this));
-        if (field_mode == ADD_FIELD_MODE) {
+        if (entity_mode == ADD_ENTITY_MODE) {
             JButton addButton = new JButton("Add your entity to the bestiary");
             addButton.addActionListener(new AddBestiaryAction(mainPanel, bestiary));
             infoPanel.add(addButton, gbc);
-        } else if (field_mode == EDIT_FIELD_MODE) {
+        } else if (entity_mode == EDIT_ENTITY_MODE) {
             JButton editButton = new JButton("Edit your entity in the bestiary");
             editButton.addActionListener(new EditBestiaryAction(this, mainPanel, bestiary, bestiaryForm, editEntity));
             infoPanel.add(editButton, gbc);

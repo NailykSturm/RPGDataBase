@@ -26,10 +26,11 @@ public class ValidateRPGAction implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
         RPGControler rpgControler = appWindow.getRpg();
-        rpgControler.addRPG(rpgNameField.getText());
-
+        if(!rpgNameField.getText().equals(""))
+            rpgControler.addRPG(rpgNameField.getText());
+        else
+            System.out.println("Please enter a name for the RPG");
         appWindow.changeView(new BestiaryMainPanel(appWindow, rpgControler.getCurrent().getBestiary()));
     }
 }

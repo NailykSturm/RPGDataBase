@@ -40,7 +40,6 @@ public class BestiaryForm implements Serializable {
      * @param rpg the model used for this form.
      */
     public BestiaryForm(RPGInfo rpg) {
-        System.out.println("DEBUG => BestiaryForm.Constructor => On créer une nouvelle instance de BestiaryForm");
         this.rpg = rpg;
         fields = LoadBestiary.loadBestiaryFormFromFile(rpg);
     }
@@ -152,19 +151,10 @@ public class BestiaryForm implements Serializable {
      * @param rpg the rpg to set
      */
     public void checkIfEverythingIsLoaded(RPGInfo rpg) {
-        System.out.println("DEBUG : BestiaryForm.checkIfEverythingIsLoaded => fields = " + fields);
         if (fields == null) {
             fields = LoadBestiary.loadBestiaryFormFromFile(rpg);
         }
         if (rpg == null)
             this.rpg = rpg;
-    }
-
-    public String isRealyLoaded() {
-        System.out.println("DEBUG => BestiaryForm.isRealyLoaded => We try to see if anything is loaded");
-        for (BestiaryFieldForm field : fields) {
-            System.out.println("DEBUG => BestiaryForm.isRealyLoaded => field = " + field.getName());
-        }
-        return "Yes";
     }
 }
