@@ -13,6 +13,7 @@ import javax.swing.JPanel;
  */
 public class WelcomePanel extends JPanel {
 
+	private static final long serialVersionUID = 1L;
     /**
      * Constructor of the class
      * @param mainWindow main window of the application

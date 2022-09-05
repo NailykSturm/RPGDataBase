@@ -16,7 +16,9 @@ import view.main.WelcomePanel;
  */
 public class AppWindow extends JFrame {
 
-    /** Controler of the rpgs */
+	private static final long serialVersionUID = 1L;
+	
+	/** Controler of the rpgs */
     private RPGControler rpgControler;
 
     /**

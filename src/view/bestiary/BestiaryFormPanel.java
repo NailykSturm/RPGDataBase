@@ -35,7 +35,8 @@ import model.bestiary.BestiaryInfo;
  */
 public class BestiaryFormPanel extends JPanel {
 
-    /** Mode for adding a field */
+	private static final long serialVersionUID = 1L;
+	/** Mode for adding a field */
     private static final String ADD_FIELD_MODE = "Add Field";
     /** Mode for editing a field */
     private static final String EDIT_FIELD_MODE = "Edit Field";

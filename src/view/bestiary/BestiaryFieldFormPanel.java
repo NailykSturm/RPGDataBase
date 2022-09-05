@@ -15,7 +15,9 @@ import javax.swing.JTextField;
  */
 public class BestiaryFieldFormPanel extends JPanel {
     
-    public BestiaryFieldFormPanel(JTextField field) {
+	private static final long serialVersionUID = 1L;
+
+	public BestiaryFieldFormPanel(JTextField field) {
         this.setLayout(new BorderLayout());
         this.add(field, BorderLayout.CENTER);
     }

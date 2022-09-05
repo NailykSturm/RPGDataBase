@@ -16,7 +16,8 @@ import view.common.AppWindow;
  */
 public class BestiaryMainPanel extends JPanel {
 
-    private AppWindow appWindow;
+	private static final long serialVersionUID = 1L;
+	private AppWindow appWindow;
     /** The form panel showed as child */
     private BestiaryFormPanel bestiaryFormPanel;
     /** The bestiary used */
