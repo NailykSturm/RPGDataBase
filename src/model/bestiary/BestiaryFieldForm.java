@@ -9,6 +9,8 @@ import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
+import view.bestiary.BestiaryFieldFormPanel;
+
 /**
  * This class is the class that manage the fields of the bestiary form.
  * 
@@ -105,16 +107,15 @@ public class BestiaryFieldForm implements Serializable {
      * @return the component used for this field
      */
     public JPanel getComponent() {
-        // TODO : Return the component as JPanel (view.bestiary.BestiaryFieldComponent)
         JPanel panel = new JPanel();
         if (textField != null)
-            panel.add(textField);
+            panel = new BestiaryFieldFormPanel(textField).getFieldPanel();
         if (checkBox != null)
-            panel.add(checkBox);
+            panel = new BestiaryFieldFormPanel(checkBox).getFieldPanel();
         if (spinner != null)
-            panel.add(spinner);
+            panel = new BestiaryFieldFormPanel(spinner).getFieldPanel();
         if (slider != null)
-            panel.add(slider);
+            panel = new BestiaryFieldFormPanel(slider).getFieldPanel();
 
         return panel;
     }
@@ -166,6 +167,14 @@ public class BestiaryFieldForm implements Serializable {
         if (options == null) {
             options = new ArrayList<String>();
         }
+    }
+
+    public boolean isCorrectlyFilled() {
+        boolean isCorrectlyFilled = true;
+        if (options.contains(BestiaryForm.OPT_REQUIRED))
+            isCorrectlyFilled = isCorrectlyFilled && !getValue().equals("");
+
+        return isCorrectlyFilled;
     }
 
     /**

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import model.bestiary.BestiaryEntity;
 import model.bestiary.BestiaryFieldForm;
 import model.bestiary.BestiaryInfo;
+import view.bestiary.BestiaryFormPanel;
 import view.bestiary.BestiaryMainPanel;
 
 /**
@@ -27,12 +28,19 @@ public class AddBestiaryAction implements ActionListener {
 	@Override
     public void actionPerformed(ActionEvent e) {
         HashMap<String, String> entityCharacteristics = new HashMap<>();
-        HashMap<String, BestiaryFieldForm> bestiaryFormFields = bestiaryPanel.getFormPanel().getBestiaryFormHashMap();
+        BestiaryFormPanel bestiaryForm = bestiaryPanel.getFormPanel();
+        HashMap<String, BestiaryFieldForm> bestiaryFormFields = bestiaryForm.getBestiaryFormHashMap();
+        boolean isEntityValid = true;
         for (String key : bestiaryFormFields.keySet()) {
+            isEntityValid = isEntityValid && bestiaryFormFields.get(key).isCorrectlyFilled();
             entityCharacteristics.put(key, bestiaryFormFields.get(key).getValue());
         }
-        bestiary.addEntity(new BestiaryEntity(entityCharacteristics));
+        if (isEntityValid) {
+            bestiary.addEntity(new BestiaryEntity(entityCharacteristics));
         bestiary.getCurrentForm().resetAllFields();
         bestiaryPanel.refresh();
+        }else{
+            System.out.println("AddBestiaryAction => Entity not valid !");
+        }
     }
 }
