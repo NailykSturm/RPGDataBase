@@ -22,7 +22,7 @@ public class CancelValidateRPGAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         appWindow.getContentPane().removeAll();
-        appWindow.getContentPane().add(new WelcomePanel(appWindow));
+        appWindow.getContentPane().add(new WelcomePanel());
         appWindow.getContentPane().revalidate();
         appWindow.getContentPane().repaint();
     }

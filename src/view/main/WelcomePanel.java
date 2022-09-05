@@ -5,9 +5,6 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import view.common.AppWindow;
-import view.common.MenuPanel;
-
 /**
  * Welcome panel of the application
  * Contains a welcome message and a button to choose workspace
@@ -16,18 +13,12 @@ import view.common.MenuPanel;
  */
 public class WelcomePanel extends JPanel {
 
-    private AppWindow appWindow;
-
     /**
      * Constructor of the class
      * @param mainWindow main window of the application
      */
-    public WelcomePanel(AppWindow mainWindow) {
-        this.appWindow = mainWindow;
+    public WelcomePanel() {
         setLayout(new BorderLayout());
-
-        // Menu bar
-        this.add(new MenuPanel(appWindow), BorderLayout.NORTH);
 
         // Welcome message
         this.add(message(), BorderLayout.CENTER);

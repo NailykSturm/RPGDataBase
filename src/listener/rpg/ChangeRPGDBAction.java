@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import model.rpg.RPGControler;
 import model.rpg.RPGInfo;
-import view.bestiary.BestiaryMainPanel;
+import view.common.AppTabbedPane;
 import view.common.AppWindow;
 
 /**
@@ -27,6 +27,6 @@ public class ChangeRPGDBAction implements ActionListener {
         RPGControler rpgControler = appWindow.getRpg();
         rpgControler.setCurrent(rpg);
 
-        appWindow.changeView(new BestiaryMainPanel(appWindow, rpg.getBestiary()));
+        appWindow.changeView(new AppTabbedPane(appWindow, rpgControler));
     }
 }

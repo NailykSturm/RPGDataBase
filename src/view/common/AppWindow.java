@@ -1,7 +1,9 @@
 package view.common;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import model.main.StartApp;
 import model.rpg.RPGControler;
@@ -27,8 +29,12 @@ public class AppWindow extends JFrame {
         setSize(StartApp.screenSize);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        WelcomePanel welcomePanel = new WelcomePanel(this);
-        this.setContentPane(welcomePanel);
+        WelcomePanel welcomePanel = new WelcomePanel();
+        MenuPanel menu = new MenuPanel(this);
+
+        this.setLayout(new BorderLayout());
+        this.add(menu, BorderLayout.NORTH);
+        this.add(welcomePanel, BorderLayout.CENTER);
     }
 
     /**
@@ -43,9 +49,11 @@ public class AppWindow extends JFrame {
      * Function that used to change the main panel to show to the user
      * @param newPanel the new panel to show
      */
-    public void changeView(JPanel newPanel) {
+    public void changeView(JComponent newPanel) {
         this.getContentPane().removeAll();
-        this.getContentPane().add(newPanel);
+        MenuPanel menu = new MenuPanel(this);
+        this.getContentPane().add(menu, BorderLayout.NORTH);
+        this.getContentPane().add(newPanel, BorderLayout.CENTER);
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
     }

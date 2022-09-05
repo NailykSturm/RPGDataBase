@@ -3,6 +3,7 @@ package view.rpg;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -29,23 +30,23 @@ public class ListRPGMenu extends JMenu {
 
         ArrayList<RPGInfo> rpgs = rpgControler.getRPGList();
         if (rpgs.size() == 0) {
-            JMenu menu = new JMenu("No RPG saved");
+            JLabel info = new JLabel("No RPG saved");
             JButton addRPG = new JButton("+ Create RPG");
             addRPG.addActionListener(new AddRPGRequest(appWindow));
-            menu.add(addRPG);
-            this.add(menu);
+            this.add(info);
+            this.add(addRPG);
         } else {
-            JMenu menu = new JMenu("List of RPG");
+            JLabel info = new JLabel("List of RPG");
             JButton addRPG = new JButton("+ Create RPG");
             addRPG.addActionListener(new AddRPGRequest(appWindow));
-            menu.add(addRPG);
+            this.add(info);
+            this.add(addRPG);
 
             for (int i = 0; i < rpgs.size(); i++) {
                 JMenuItem item = new JMenuItem(rpgs.get(i).getName());
                 item.addActionListener(new ChangeRPGDBAction(appWindow, rpgs.get(i)));
-                menu.add(item);
+                this.add(item);
             }
-            this.add(menu);
         }
     }
 

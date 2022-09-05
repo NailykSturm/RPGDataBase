@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
 import model.rpg.RPGControler;
-import view.bestiary.BestiaryMainPanel;
+import view.common.AppTabbedPane;
 import view.common.AppWindow;
 
 /**
@@ -31,6 +31,7 @@ public class ValidateRPGAction implements ActionListener {
             rpgControler.addRPG(rpgNameField.getText());
         else
             System.out.println("Please enter a name for the RPG");
-        appWindow.changeView(new BestiaryMainPanel(appWindow, rpgControler.getCurrent().getBestiary()));
+        appWindow.changeView(
+            new AppTabbedPane(appWindow, rpgControler));
     }
 }

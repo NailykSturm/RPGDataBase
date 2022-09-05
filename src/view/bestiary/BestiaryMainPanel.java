@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 import model.bestiary.BestiaryInfo;
 import view.common.AppWindow;
-import view.common.MenuPanel;
 
 /**
  * View of all the bestiary
@@ -46,7 +45,6 @@ public class BestiaryMainPanel extends JPanel {
     private JPanel infoPanel() {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
-        infoPanel.add(new MenuPanel(appWindow), BorderLayout.WEST);
         infoPanel.add(new JLabel("Bestiary of " + appWindow.getRpg().getCurrent()), BorderLayout.CENTER);
         this.add(infoPanel, BorderLayout.NORTH);
         return infoPanel;
