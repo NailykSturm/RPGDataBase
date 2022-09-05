@@ -2,6 +2,10 @@ package model.main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import model.rpg.LoadRPG;
 import model.rpg.RPGControler;
@@ -48,6 +52,16 @@ public class StartApp {
 
     // Constructor
     public static void main(String[] args) {
+        String savesFilePath = FOLDER + FOLDER_TEMPLATE;
+        Path savesPath = Paths.get(savesFilePath);
+        if(!Files.exists(savesPath))
+            try {
+                Files.createDirectories(savesPath);
+            } catch (IOException eIO) {
+                eIO.printStackTrace();
+            }
+
+
         RPGControler rpgControler = LoadRPG.loadRPGFromSave();
         AppWindow welcolmeFrame = new AppWindow(rpgControler);
         welcolmeFrame.setVisible(true);
