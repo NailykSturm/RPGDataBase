@@ -22,7 +22,8 @@ import model.bestiary.BestiaryInfo;
  */
 public class BestiaryListPanel extends JPanel {
 
-    /** Bestiary used */
+	private static final long serialVersionUID = 1L;
+	/** Bestiary used */
     private BestiaryInfo bestiary;
     /** Parent bestiary main panel */
     private BestiaryMainPanel bestiaryMainPanel;

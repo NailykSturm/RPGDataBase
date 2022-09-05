@@ -16,7 +16,8 @@ import view.common.MenuPanel;
  */
 public class WelcomePanel extends JPanel {
 
-    private AppWindow appWindow;
+	private static final long serialVersionUID = 1L;
+	private AppWindow appWindow;
 
     /**
      * Constructor of the class

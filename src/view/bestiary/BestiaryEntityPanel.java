@@ -20,7 +20,8 @@ import model.bestiary.BestiaryEntity;
  */
 public class BestiaryEntityPanel extends JPanel {
 
-    /** The entity to display */
+	private static final long serialVersionUID = 1L;
+	/** The entity to display */
     private BestiaryEntity entity;
     /** The bestiary's main panel */
     private BestiaryMainPanel bestiaryMainPanel;

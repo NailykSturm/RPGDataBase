@@ -15,7 +15,9 @@ import view.rpg.ListRPGMenu;
  */
 public class MenuPanel extends JPanel {
 
-    /**
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Constructor
      * @param appWindow the main app's window
      */

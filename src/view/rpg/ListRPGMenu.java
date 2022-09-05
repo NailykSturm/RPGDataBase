@@ -19,7 +19,9 @@ import view.common.AppWindow;
  */
 public class ListRPGMenu extends JMenu {
 
-    /**
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Create a menu whereas the lost of rpg 
      * @param appWindow parent window of the menu
      * @param rpgControler controler of the rpgs
