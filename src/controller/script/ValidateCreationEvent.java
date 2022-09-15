@@ -31,6 +31,9 @@ public class ValidateCreationEvent implements ActionListener {
                 && (form.getAllLinkedEvents().size() > 0 || rpg.getScript().getEvents().size() == 0)) {
             ScriptEvent event = new ScriptEvent(form.getTextArea().getText(), form.getAllLinkedEvents());
             rpg.getScript().addEvent(event);
+            event.getParentEvents().forEach((parentEvent, parentEventName) -> {
+                parentEvent.linkChlidEvent(event);
+            });
             form.resetAll();
             formPanel.getMainPanel().refresh();
             System.out.println("DEBUG => ValidateCreationEvent => actionPerformed => " + event + " created");

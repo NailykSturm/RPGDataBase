@@ -94,7 +94,7 @@ public class ScriptEvent implements Serializable {
     /**
      * @return the list of events created in the script
      */
-    public HashMap<ScriptEvent, String> getEvents() {
+    public HashMap<ScriptEvent, String> getParentEvents() {
         return this.parentEvents;
     }
 

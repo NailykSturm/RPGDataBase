@@ -1,10 +1,11 @@
-package view.script;
+package controller.script;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import model.script.ScriptEvent;
 import model.script.ScriptForm;
+import view.script.ScriptFormPanel;
 
 /**
  * Listener for adding a parent event to the new event

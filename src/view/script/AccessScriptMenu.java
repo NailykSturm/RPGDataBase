@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.script.AddEventToFormAction;
 import model.script.ScriptEvent;
 import model.script.ScriptForm;
 
