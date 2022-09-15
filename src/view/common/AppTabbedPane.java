@@ -17,7 +17,7 @@ public class AppTabbedPane extends JTabbedPane {
 
     public AppTabbedPane(AppWindow app, RPGControler rpgControler) {
         BestiaryMainPanel bestiaryMainPanel = new BestiaryMainPanel(app, rpgControler.getCurrent().getBestiary());
-        ScriptMainPanel scriptMainPanel = new ScriptMainPanel();
+        ScriptMainPanel scriptMainPanel = new ScriptMainPanel(rpgControler.getCurrent());
         NoteBlocMainPanel noteBlocMainPanel = new NoteBlocMainPanel();
 
         this.add("Bestiary", bestiaryMainPanel);

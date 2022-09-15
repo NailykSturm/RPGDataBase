@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import listener.bestiary.DeleteEntityAction;
+import controller.bestiary.DeleteEntityAction;
 import model.bestiary.BestiaryEntity;
 import model.bestiary.BestiaryInfo;
 

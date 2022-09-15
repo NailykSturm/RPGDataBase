@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import model.bestiary.BestiaryForm;
 import model.bestiary.BestiaryInfo;
 import model.bestiary.LoadBestiary;
+import model.script.ScriptControler;
 
 /**
  * RPGInfo class
@@ -26,6 +27,8 @@ public class RPGInfo implements Serializable {
     private BestiaryInfo bestiary;
     /** The list of templates for the bestiary's form */
     private ArrayList<BestiaryForm> bestiaryFormTemplates;
+    /** The script linked to this RPG */
+    private ScriptControler script;
 
     /**
      * Constructor of the class
@@ -37,6 +40,7 @@ public class RPGInfo implements Serializable {
         this.rpgControler = rpgControler;
         this.bestiary = new BestiaryInfo(this);
         this.bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(this.rpgControler);
+        this.script = new ScriptControler(this);
     }
 
     /**
@@ -55,6 +59,13 @@ public class RPGInfo implements Serializable {
         return bestiary;
     }
 
+    /**
+     * @return the script linked to this RPG
+     */
+    public ScriptControler getScript() {
+        return script;
+    }
+
     @Override
     public String toString() {
         return "RPG => " + name;
@@ -70,6 +81,8 @@ public class RPGInfo implements Serializable {
             this.rpgControler = rpgControler;
         if (bestiaryFormTemplates == null)
             bestiaryFormTemplates = LoadBestiary.loadBestiaryTemplate(rpgControler);
+        if (script == null)
+            script = new ScriptControler(this);
     }
 
     /**

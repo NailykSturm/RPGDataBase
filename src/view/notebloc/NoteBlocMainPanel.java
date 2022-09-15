@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class NoteBlocMainPanel extends JPanel{
 
     public NoteBlocMainPanel(){
-        this.add(new JLabel("Sorry, but this zone is under construction !\nPlease, come back in a later version"));
+        this.add(new JLabel("Sorry, but this zone is under construction ! Please, come back in a later version"));
     }
 
 }

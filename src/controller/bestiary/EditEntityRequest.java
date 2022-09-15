@@ -1,4 +1,4 @@
-package listener.bestiary;
+package controller.bestiary;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

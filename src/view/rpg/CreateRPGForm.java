@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import listener.rpg.CancelValidateRPGAction;
-import listener.rpg.ValidateRPGAction;
+import controller.rpg.CancelValidateRPGAction;
+import controller.rpg.ValidateRPGAction;
 import view.common.AppWindow;
 import view.common.MenuPanel;
 

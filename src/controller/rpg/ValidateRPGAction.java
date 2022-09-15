@@ -1,4 +1,4 @@
-package listener.rpg;
+package controller.rpg;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

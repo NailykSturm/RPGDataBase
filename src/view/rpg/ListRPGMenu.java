@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import listener.main.AddRPGRequest;
-import listener.rpg.ChangeRPGDBAction;
+import controller.main.AddRPGRequest;
+import controller.rpg.ChangeRPGDBAction;
 import model.rpg.RPGControler;
 import model.rpg.RPGInfo;
 import view.common.AppWindow;

@@ -1,4 +1,4 @@
-package listener.bestiary;
+package controller.bestiary;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

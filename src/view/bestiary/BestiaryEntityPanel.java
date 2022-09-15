@@ -10,7 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import listener.bestiary.EditEntityRequest;
+import controller.bestiary.EditEntityRequest;
 import model.bestiary.BestiaryEntity;
 
 /**
