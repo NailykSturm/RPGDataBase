@@ -7,9 +7,8 @@ import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JMenuItem;
 
-import controller.script.AddEntityToScript;
 import model.bestiary.BestiaryEntity;
 import model.script.ScriptForm;
 
@@ -18,7 +17,7 @@ import model.script.ScriptForm;
  * 
  * @author NailykSturm
  */
-public class EntityScriptMenu extends JPanel {
+public class EntityScriptMenu extends JMenuItem {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,7 +28,7 @@ public class EntityScriptMenu extends JPanel {
      */
     public EntityScriptMenu(BestiaryEntity entity, ScriptForm form, ScriptFormPanel scriptFormPanel) {
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
+        this.setPreferredSize(this.getPreferredSize());
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.YELLOW);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -40,6 +39,5 @@ public class EntityScriptMenu extends JPanel {
         for (String field : entity.getCaracteristics().keySet()) {
             this.add(new JLabel(field + " : " + entity.getCaracteristics().get(field)), gbc);
         }
-        this.addMouseListener(new AddEntityToScript(entity, form, scriptFormPanel));
     }
 }

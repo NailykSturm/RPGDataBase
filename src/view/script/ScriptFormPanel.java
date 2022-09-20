@@ -12,6 +12,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import controller.script.AddEntityToScript;
+import controller.script.AddEventToFormAction;
 import controller.script.ValidateCreationEvent;
 import controller.script.ValidateEditionEvent;
 import model.main.StartApp;
@@ -117,12 +119,17 @@ public class ScriptFormPanel extends JPanel {
         c.weighty = 1;
         JMenu entityMenu = new JMenu("Add an ennemy ?");
         JMenuBar entityMenuBar = new JMenuBar();
+        JScrollPane entityScrollPane = new JScrollPane(entityMenuBar);
         rpg.getBestiary().getEntities().forEach(entity -> {
-            if (!form.getAllLinkedEntities().contains(entity))
-                entityMenu.add(new EntityScriptMenu(entity, form, this));
+            if (!form.getAllLinkedEntities().contains(entity)){
+                EntityScriptMenu entityScriptMenu = new EntityScriptMenu(entity, form, this);
+                entityScriptMenu.addActionListener(new AddEntityToScript(entity, form, this, entityMenu, entityScriptMenu));
+                
+                entityMenu.add(entityScriptMenu);
+            }
         });
         entityMenuBar.add(entityMenu);
-        this.add(entityMenuBar, c);
+        this.add(entityScrollPane, c);
 
         // List of all entity selected
         c.gridx = 2;
@@ -141,8 +148,11 @@ public class ScriptFormPanel extends JPanel {
         JMenuBar acessMenuBar = new JMenuBar();
         acessMenuBar.add(accessMenu);
         rpg.getScript().getEvents().forEach(event -> {
-            if (!form.getAllLinkedEvents().containsKey(event))
-                accessMenu.add(new AccessScriptMenu(event, form, this));
+            if (!form.getAllLinkedEvents().containsKey(event)){
+                AccessScriptMenu accessScriptMenu = new AccessScriptMenu(event, form, this);
+                accessScriptMenu.addActionListener(new AddEventToFormAction(event, form, this, accessMenu, accessScriptMenu));
+                accessMenu.add(accessScriptMenu);
+            }
         });
         this.add(acessMenuBar, c);
 

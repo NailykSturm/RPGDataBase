@@ -1,10 +1,13 @@
 package controller.script;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JMenu;
 
 import model.bestiary.BestiaryEntity;
 import model.script.ScriptForm;
+import view.script.EntityScriptMenu;
 import view.script.ScriptFormPanel;
 
 /**
@@ -12,35 +15,28 @@ import view.script.ScriptFormPanel;
  * 
  * @author NailykSturm
  */
-public class AddEntityToScript implements MouseListener {
+public class AddEntityToScript implements ActionListener {
 
     private BestiaryEntity entity;
     private ScriptForm form;
     private ScriptFormPanel scriptFormPanel;
+    private JMenu menu;
+    private EntityScriptMenu entityScriptMenu;
 
-    public AddEntityToScript(BestiaryEntity entity, ScriptForm form, ScriptFormPanel scriptFormPanel) {
+    public AddEntityToScript(BestiaryEntity entity, ScriptForm form, ScriptFormPanel scriptFormPanel, JMenu entityMenu, EntityScriptMenu entityScriptMenu) {
         this.entity = entity;
         this.form = form;
         this.scriptFormPanel = scriptFormPanel;
+        this.menu = entityMenu;
+        this.entityScriptMenu = entityScriptMenu;
     }
 
     @Override
-    public void mouseClicked(MouseEvent arg0) {
+    public void actionPerformed(ActionEvent arg0) {
         System.out.println("DEBUG => AddEntityToScript => mouseClicked => entity : \n" + entity + " added to the event");
         form.addEntity(entity);
+        menu.remove(entityScriptMenu);
         scriptFormPanel.getMainPanel().refresh();
     }
-
-    @Override
-    public void mouseEntered(MouseEvent arg0) {}
-
-    @Override
-    public void mouseExited(MouseEvent arg0) {}
-
-    @Override 
-    public void mousePressed(MouseEvent arg0) {}
-
-    @Override
-    public void mouseReleased(MouseEvent arg0) {}
 
 }
