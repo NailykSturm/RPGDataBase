@@ -1,6 +1,7 @@
 package view.script;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -28,7 +29,7 @@ public class EntityScriptMenu extends JMenuItem {
      */
     public EntityScriptMenu(BestiaryEntity entity, ScriptForm form, ScriptFormPanel scriptFormPanel) {
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        this.setPreferredSize(this.getPreferredSize());
+        this.setPreferredSize(new Dimension(200, 40));
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.YELLOW);
         GridBagConstraints gbc = new GridBagConstraints();
