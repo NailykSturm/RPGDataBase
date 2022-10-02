@@ -1,5 +1,6 @@
 # Compiled class file
 *.class
+bin/
 
 # Log file
 *.log
@@ -25,4 +26,7 @@ replay_pid*
 /bin/
 
 # Saved application files
-*.rpgdb
+*save/
+
+# VS code settings
+.vscode/
