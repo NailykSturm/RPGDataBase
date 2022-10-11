@@ -27,7 +27,7 @@ public class Field {
         return req;
     }
 
-    public boolean isChecked() {
+    public boolean isACheckbox() {
         return check;
     }
 

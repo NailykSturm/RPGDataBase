@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
+import model.bestiary.Bestiary;
+
 /*
  * This class represents a RPG.
  */
@@ -17,15 +19,18 @@ public class RPG {
     private static int nbRPG = 0;
     private int idRpg;
     private String name;
+    private Bestiary bestiary;
 
     public RPG(String name) {
         this.name = name;
         idRpg = nbRPG;
+        bestiary = new Bestiary();
         nbRPG++;
     }
 
     /**
      * This method load a RPG from a JSON file.
+     * 
      * @param file The folder where the file is saved.
      */
     public RPG(File file) {
@@ -44,20 +49,34 @@ public class RPG {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (bestiary == null) {
+            bestiary = new Bestiary();
+        }
         System.out.println("RPG loaded");
     }
 
+    /**
+     * @return The name of the RPG.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return the bestiary of the RPG
+     */
+    public Bestiary getBestiary() {
+        return bestiary;
+    }
+
     @Override
     public String toString() {
-        return "RPG n°"+ idRpg +" [name=" + name + "]";
+        return "RPG n°" + idRpg + " [name=" + name + "]";
     }
 
     /**
      * This method save the RPG in a JSON file.
+     * 
      * @param folder The folder where the file will be saved.
      */
     public void toJson(String folder) {

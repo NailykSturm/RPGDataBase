@@ -1,22 +1,28 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import model.bestiary.Bestiary;
 import model.bestiary.Field;
 import model.rpg.RPG;
 
 public class ControllerMainTool {
+
+    private RPG rpg = Main.rpgs.getCurrentRPG();
 
     /*
      * ================================
@@ -57,7 +63,7 @@ public class ControllerMainTool {
     @FXML
     private CheckBox count_checkbox;
 
-    private ArrayList<Field> fields = new ArrayList<Field>();
+    private Bestiary bestiary = rpg.getBestiary();
 
     public void addField() {
         name_field.setStyle("");
@@ -67,13 +73,14 @@ public class ControllerMainTool {
                 check_checkbox.isSelected(), count_checkbox.isSelected());
         boolean uniqFound = false;
 
-        uniqFound = isSameAsUniqFields(field);
+        uniqFound = isAlreadyCreated(field);
 
         if (!uniqFound) {
             System.out.println("You're adding a field");
             name_field.setText("");
-            fields.add(field);
+            bestiary.addField(field);
             updateFieldList();
+            Main.rpgs.saveToJson();
         } else {
             System.out.println("This field already exists");
             name_field.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
@@ -87,9 +94,9 @@ public class ControllerMainTool {
         count_checkbox.setSelected(false);
     }
 
-    private boolean isSameAsUniqFields(Field field) {
-        for (Field f : fields) {
-            if ((f.isUnique() || field.isUnique()) && f.getName().equals(field.getName())) {
+    private boolean isAlreadyCreated(Field field) {
+        for (Field f : bestiary.getFields()) {
+            if (f.getName().equals(field.getName())) {
                 return true;
             }
         }
@@ -100,20 +107,52 @@ public class ControllerMainTool {
     private VBox list_fields;
 
     private void updateFieldList() {
-        System.out.println("Updating Field List");
         list_fields.getChildren().clear();
-        for (Field field : fields) {
+        for (Field field : bestiary.getFields()) {
             try {
                 Pane pane = FXMLLoader.load(Main.class.getResource("../view/fieldCell.fxml"));
-                System.out.println(pane.getChildren());
-                Label name = (Label) pane.getChildren().get(0);
-                name.setText(field.getName());
+                ObservableList<Node> children = pane.getChildren();
+                int i = 0;
 
+                for (Node node : children) {
+                    if (node instanceof Label && node.getId().equals("lbTitle")) {
+                        ((Label) node).setText(field.getName());
+                    } else if (node instanceof TextField && node.getId().equals("lbDescription")){
+                        if (field.isACheckbox()) {
+                            CheckBox checkbox = new CheckBox();
+                            pane.getChildren().set(i, checkbox);
+                        } else if (field.isACounter()) {
+                            Spinner<Integer> spinner = new Spinner<Integer>(0, Integer.MAX_VALUE, 0);
+                            pane.getChildren().set(i, spinner);
+                        }
+                    } else if(node instanceof Button && node.getId().equals("deleteFieldButton")) {
+                        ((Button) node).setOnAction(e -> {
+                            System.out.println("You're deleting a field");
+                            bestiary.removeField(field);
+                            updateFieldList();
+                        });
+                    } else if(node instanceof Button && node.getId().equals("editFieldButton")) {
+                        ((Button) node).setOnAction(e -> {
+                            System.out.println("You're editing a field");
+                            updateFieldList();
+                        });
+                    }
+                    i++;
+                }
+                String style = "";
+                if(field.isUnique()){
+                    style += "-fx-background-color: #CCB100FF;";
+                }
+                if(field.isRequired()){
+                    style += "-fx-border-color: red ; -fx-border-width: 2px ; -fx-border-style: dotted ;";
+                }
+                pane.setStyle(style);
                 list_fields.getChildren().add(pane);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println("Field List Updated\n");
     }
 
     /*
