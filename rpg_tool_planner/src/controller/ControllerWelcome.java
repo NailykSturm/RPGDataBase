@@ -9,8 +9,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import model.RPG;
-import model.RPGs;
+import model.rpg.RPG;
+import model.rpg.RPGs;
 
 public class ControllerWelcome {
 

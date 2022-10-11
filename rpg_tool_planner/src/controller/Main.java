@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -8,12 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.RPGs;
+import model.rpg.RPGs;
 
 public class Main extends Application {
 
     private static Scene scene;
-    protected static RPGs rpgs;
+    protected static RPGs rpgs; 
 
     public static void main(String[] args) throws Exception {
         launch(args);
@@ -23,7 +22,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         rpgs = new RPGs();
         rpgs.loadFromJson();
-        scene = new Scene(loadFXML("welcome"), 640, 480);
+        scene = new Scene(loadFXML("welcome"), 1200, 860);
         primaryStage.setTitle("RPG Planner Tool");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -31,7 +30,6 @@ public class Main extends Application {
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
-        
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

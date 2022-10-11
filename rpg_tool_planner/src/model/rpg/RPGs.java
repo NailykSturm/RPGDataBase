@@ -1,4 +1,4 @@
-package model;
+package model.rpg;
 
 import java.io.File;
 import java.util.ArrayList;
