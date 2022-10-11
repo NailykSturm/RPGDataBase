@@ -59,7 +59,7 @@
                                              <children>
                                                 <ScrollPane fx:id="list_fields1" layoutX="-27.0" layoutY="-26.0" prefHeight="167.55854280536872" prefWidth="145.61635267609424" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <content>
-                                                      <Button fx:id="createEntity" mnemonicParsing="false" text="Validate creation of entity" />
+                                                      <Button fx:id="createEntity" mnemonicParsing="false" onAction="#addMonster" text="Validate creation of entity" />
                                                    </content>
                                                 </ScrollPane>
                                              </children>
@@ -69,7 +69,7 @@
                                                 <Button fx:id="valid_field" layoutX="86.0" layoutY="1.0" mnemonicParsing="false" onAction="#addField" text="Valider" />
                                                 <Label layoutX="13.0" layoutY="33.0" text="Field name" />
                                                 <TextField fx:id="name_field" layoutX="82.0" layoutY="28.0" prefHeight="29.0" prefWidth="90.0" />
-                                                <CheckBox fx:id="uniq_checkbox" layoutX="16.0" layoutY="80.0" mnemonicParsing="false" text="Is unique" />
+                                                <CheckBox fx:id="uniq_checkbox" layoutX="16.0" layoutY="80.0" mnemonicParsing="false" text="Is unique (for differentiate monsters)" />
                                                 <CheckBox fx:id="req_checkbox" layoutX="16.0" layoutY="99.0" mnemonicParsing="false" text="Is required" />
                                                 <CheckBox fx:id="check_checkbox" layoutX="15.0" layoutY="119.0" mnemonicParsing="false" text="Is a checkbox" />
                                                 <CheckBox fx:id="count_checkbox" layoutX="14.0" layoutY="140.0" mnemonicParsing="false" text="Is a counter" />

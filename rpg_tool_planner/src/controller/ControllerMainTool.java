@@ -69,29 +69,36 @@ public class ControllerMainTool {
         name_field.setStyle("");
         name_error.setText("");
         System.out.println("The field " + name_field.getText() + " will be created");
-        Field field = new Field(name_field.getText(), uniq_checkbox.isSelected(), req_checkbox.isSelected(),
-                check_checkbox.isSelected(), count_checkbox.isSelected());
-        boolean uniqFound = false;
+        try {
+            Field field = new Field(name_field.getText(), uniq_checkbox.isSelected(), req_checkbox.isSelected(),
+                    check_checkbox.isSelected(), count_checkbox.isSelected());
+            boolean uniqFound = false;
 
-        uniqFound = isAlreadyCreated(field);
+            uniqFound = isAlreadyCreated(field);
 
-        if (!uniqFound) {
-            System.out.println("You're adding a field");
-            name_field.setText("");
-            bestiary.addField(field);
-            updateFieldList();
-            Main.rpgs.saveToJson();
-        } else {
-            System.out.println("This field already exists");
+            if (!uniqFound) {
+                System.out.println("You're adding a field");
+                name_field.setText("");
+                bestiary.addField(field);
+                updateFieldList();
+                Main.rpgs.saveToJson();
+            } else {
+                System.out.println("This field already exists");
+                name_field.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+                name_error.setText("This field already exists");
+                name_error.setTextFill(Color.RED);
+            }
+
+            uniq_checkbox.setSelected(false);
+            req_checkbox.setSelected(false);
+            check_checkbox.setSelected(false);
+            count_checkbox.setSelected(false);
+        } catch (Error e) {
+            System.out.println(e.getMessage());
             name_field.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
-            name_error.setText("This field already exists");
+            name_error.setText(e.getMessage());
             name_error.setTextFill(Color.RED);
         }
-
-        uniq_checkbox.setSelected(false);
-        req_checkbox.setSelected(false);
-        check_checkbox.setSelected(false);
-        count_checkbox.setSelected(false);
     }
 
     private boolean isAlreadyCreated(Field field) {
@@ -117,7 +124,7 @@ public class ControllerMainTool {
                 for (Node node : children) {
                     if (node instanceof Label && node.getId().equals("lbTitle")) {
                         ((Label) node).setText(field.getName());
-                    } else if (node instanceof TextField && node.getId().equals("lbDescription")){
+                    } else if (node instanceof TextField && node.getId().equals("lbDescription")) {
                         if (field.isACheckbox()) {
                             CheckBox checkbox = new CheckBox();
                             pane.getChildren().set(i, checkbox);
@@ -125,13 +132,13 @@ public class ControllerMainTool {
                             Spinner<Integer> spinner = new Spinner<Integer>(0, Integer.MAX_VALUE, 0);
                             pane.getChildren().set(i, spinner);
                         }
-                    } else if(node instanceof Button && node.getId().equals("deleteFieldButton")) {
+                    } else if (node instanceof Button && node.getId().equals("deleteFieldButton")) {
                         ((Button) node).setOnAction(e -> {
                             System.out.println("You're deleting a field");
                             bestiary.removeField(field);
                             updateFieldList();
                         });
-                    } else if(node instanceof Button && node.getId().equals("editFieldButton")) {
+                    } else if (node instanceof Button && node.getId().equals("editFieldButton")) {
                         ((Button) node).setOnAction(e -> {
                             System.out.println("You're editing a field");
                             updateFieldList();
@@ -140,10 +147,10 @@ public class ControllerMainTool {
                     i++;
                 }
                 String style = "";
-                if(field.isUnique()){
+                if (field.isUnique()) {
                     style += "-fx-background-color: #CCB100FF;";
                 }
-                if(field.isRequired()){
+                if (field.isRequired()) {
                     style += "-fx-border-color: red ; -fx-border-width: 2px ; -fx-border-style: dotted ;";
                 }
                 pane.setStyle(style);

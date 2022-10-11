@@ -2,17 +2,25 @@ package model.bestiary;
 
 public class Field {
     private String name;
-    private boolean uniq;
-    private boolean req;
-    private boolean check;
-    private boolean count;
+    private FieldOptions[] options = new FieldOptions[3];
 
     public Field(String name, boolean uniq, boolean req, boolean check, boolean count) {
+        if (name.equals(""))
+            throw new Error("The field name can't be empty");
         this.name = name;
-        this.uniq = uniq;
-        this.req = req;
-        this.check = check;
-        this.count = count;
+        int nbOpt = 0;
+        if (count & check)
+            throw new Error("A field can't be a counter and a checkbox");
+        if (uniq)
+            options[nbOpt] = FieldOptions.UNIQUE;
+        if (req)
+            options[nbOpt] = FieldOptions.REQUIRED;
+        if (check)
+            options[nbOpt] = FieldOptions.CHECKBOX;
+        if (count)
+            options[nbOpt] = FieldOptions.COUNTER;
+        if (nbOpt == 0)
+            options[nbOpt] = FieldOptions.NONE;
     }
 
     public String getName() {
@@ -20,19 +28,47 @@ public class Field {
     }
 
     public boolean isUnique() {
-        return uniq;
+        if (options[0] == FieldOptions.NONE)
+            return false;
+        for (FieldOptions opt : options) {
+            if (opt == FieldOptions.UNIQUE)
+                return true;
+        }
+        ;
+        return false;
     }
 
     public boolean isRequired() {
-        return req;
+        if (options[0] == FieldOptions.NONE)
+            return false;
+        for (FieldOptions opt : options) {
+            if (opt == FieldOptions.REQUIRED)
+                return true;
+        }
+        ;
+        return false;
     }
 
     public boolean isACheckbox() {
-        return check;
+        if (options[0] == FieldOptions.NONE)
+            return false;
+        for (FieldOptions opt : options) {
+            if (opt == FieldOptions.CHECKBOX)
+                return true;
+        }
+        ;
+        return false;
     }
 
     public boolean isACounter() {
-        return count;
+        if (options[0] == FieldOptions.NONE)
+            return false;
+        for (FieldOptions opt : options) {
+            if (opt == FieldOptions.COUNTER)
+                return true;
+        }
+        ;
+        return false;
     }
 
     @Override
