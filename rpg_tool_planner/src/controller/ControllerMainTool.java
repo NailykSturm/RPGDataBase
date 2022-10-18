@@ -40,15 +40,16 @@ public class ControllerMainTool {
             item.setOnAction(e -> {
                 System.out.println(((MenuItem) e.getSource()).getText());
                 Main.rpgs.setCurrentRPG(rpg);
+                updateFrame();
             });
             rpgMenu.getItems().add(item);
-            updateFrame();
         }
         updateFieldList();
     }
 
     private void updateFrame() {
-        rpg = Main.rpgs.getCurrentRPG();
+        this.rpg = Main.rpgs.getCurrentRPG();
+        this.bestiary = rpg.getBestiary();
         updateFieldList();
     }
 
@@ -170,7 +171,7 @@ public class ControllerMainTool {
         System.out.println("Field List Updated\n");
     }
 
-    public void addMonster(){
+    public void addMonster() {
         System.out.println("You're adding a monster");
     }
 
