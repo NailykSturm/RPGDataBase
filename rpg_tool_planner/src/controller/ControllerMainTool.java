@@ -39,9 +39,17 @@ public class ControllerMainTool {
             MenuItem item = new MenuItem(rpg.getName());
             item.setOnAction(e -> {
                 System.out.println(((MenuItem) e.getSource()).getText());
+                Main.rpgs.setCurrentRPG(rpg);
             });
             rpgMenu.getItems().add(item);
+            updateFrame();
         }
+        updateFieldList();
+    }
+
+    private void updateFrame() {
+        rpg = Main.rpgs.getCurrentRPG();
+        updateFieldList();
     }
 
     /*
@@ -81,7 +89,7 @@ public class ControllerMainTool {
                 name_field.setText("");
                 bestiary.addField(field);
                 updateFieldList();
-                Main.rpgs.saveToJson();
+                Main.rpgs.saveToJson(Main.rpgs.getCurrentRPG());
             } else {
                 System.out.println("This field already exists");
                 name_field.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
@@ -160,6 +168,10 @@ public class ControllerMainTool {
             }
         }
         System.out.println("Field List Updated\n");
+    }
+
+    public void addMonster(){
+        System.out.println("You're adding a monster");
     }
 
     /*

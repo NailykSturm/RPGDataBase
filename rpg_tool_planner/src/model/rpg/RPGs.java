@@ -68,6 +68,11 @@ public class RPGs {
         }
     }
 
+    public void saveToJson(RPG rpgToSave)
+    {
+        rpgToSave.toJson(saveFolder);
+    }
+
     public void loadFromJson(){
         System.out.println("Loading RPGs from JSON");
 

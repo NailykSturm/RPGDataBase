@@ -26,6 +26,8 @@ public class Main extends Application {
         primaryStage.setTitle("RPG Planner Tool");
         primaryStage.setScene(scene);
         primaryStage.show();
+        System.out.println("java version: "+System.getProperty("java.version")); 
+        System.out.println("javafx.version: " + System.getProperty("javafx.version"));
     }
 
     static void setRoot(String fxml) throws IOException {

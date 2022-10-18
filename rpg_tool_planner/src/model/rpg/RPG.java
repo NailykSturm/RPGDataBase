@@ -34,8 +34,7 @@ public class RPG {
      * @param file The folder where the file is saved.
      */
     public RPG(File file) {
-        System.out.println("Loading RPG from JSON");
-        System.out.println("Loading from folder " + file);
+        System.out.println("Loading RPG from JSON file " + file);
 
         Gson gson = new Gson();
         try {
@@ -45,6 +44,8 @@ public class RPG {
             System.out.println(data.toString());
             this.name = data.name;
             this.idRpg = data.idRpg;
+            this.bestiary = data.bestiary;
+            System.out.println(data.bestiary.toString());
             nbRPG++;
         } catch (IOException e) {
             e.printStackTrace();

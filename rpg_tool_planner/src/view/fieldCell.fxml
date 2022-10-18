@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.FlowPane?>
 
 
-<FlowPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane xmlns="http://javafx.com/javafx/11.0.16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="lbTitle" text="default" />
       <TextField fx:id="lbDescription" />
